@@ -333,16 +333,15 @@ const FILES = [
   { type:'quiz', unit:4, title:'Unit IV quiz',  added:'2026-09-19', url:'https://docs.google.com/forms/d/1gtnS7nBlc6pSF5lmj-yRHNkOEBhCdSptgF4mrgDbBXQ/viewform' }
 ];
 
-/* ASSIGNMENTS: all five sheets are in one PDF today.
-   To set a deadline, fill in due:'YYYY-MM-DD'. Leave '' if not decided yet.
-   If you later split the PDF, give each assignment its own file:'...' and the page hint disappears. */
-const HOMEWORK_FILE = ''; // no longer used as a fallback: every assignment now has its own file
+/* ASSIGNMENTS: each is its own PDF, one per unit.
+   due: 'YYYY-MM-DD', or '' if not decided yet.
+   published: false keeps an assignment out of the site entirely (students won't see it) until you set it to true. */
 const ASSIGNMENTS = [
-  { no:1, unit:1, title:'Fundamentals, Robotics and Materials',      questions:8, due:'', kb:66,  added:'2026-09-22', file:'1UzFpyufD_EMrXtb8VoVtAhbh3cxPyJ3j' },
-  { no:2, unit:2, title:'Manufacturing Processes',                    questions:8, due:'', kb:66,  added:'2026-09-22', file:'12YnjMRyzp6OQp6P5dFa5hRt2drAlBg4O' },
-  { no:3, unit:3, title:'Pumps, Refrigeration and Air Conditioning',  questions:8, due:'', kb:66,  added:'2026-09-22', file:'1Rjud5EzXijg-CYO6DsRB6PDCaxgxDYN3' },
-  { no:4, unit:4, title:'Transmission of Power',                      questions:8, due:'', kb:100, added:'2026-09-22', file:'1YObLoK5fxMiQ-742u_nGHxxhTNxoYlxh' },
-  { no:5, unit:5, title:'Thermodynamics and IC Engines',              questions:8, due:'', kb:66,  added:'2026-09-22', file:'1_ChHiMM_2xxYs3FAp_1qUPcVWlF1G6F4' }
+  { no:1, unit:1, title:'Fundamentals, Robotics and Materials',      questions:8, due:'2026-09-17', kb:66,  added:'2026-09-22', file:'1UzFpyufD_EMrXtb8VoVtAhbh3cxPyJ3j', published:true },
+  { no:2, unit:2, title:'Manufacturing Processes',                    questions:8, due:'2026-09-30', kb:66,  added:'2026-09-22', file:'12YnjMRyzp6OQp6P5dFa5hRt2drAlBg4O', published:true },
+  { no:3, unit:3, title:'Pumps, Refrigeration and Air Conditioning',  questions:8, due:'', kb:66,  added:'2026-09-22', file:'1Rjud5EzXijg-CYO6DsRB6PDCaxgxDYN3', published:false },
+  { no:4, unit:4, title:'Transmission of Power',                      questions:8, due:'', kb:100, added:'2026-09-22', file:'1YObLoK5fxMiQ-742u_nGHxxhTNxoYlxh', published:false },
+  { no:5, unit:5, title:'Thermodynamics and IC Engines',              questions:8, due:'', kb:66,  added:'2026-09-22', file:'1_ChHiMM_2xxYs3FAp_1qUPcVWlF1G6F4', published:false }
 ];
 
 /* NOTICES: short messages shown at the top of the page.
@@ -534,9 +533,14 @@ function dueInfo(a, done) {
 function assignmentAsFile(a) {
   return { type: 'assignment', unit: a.unit, no: a.no, title: 'Assignment ' + a.no + ': ' + a.title, file: a.file, kb: a.kb, added: a.added, fmt: 'PDF' };
 }
+function publishedAssignments() {
+  return ASSIGNMENTS.filter(a => a.published !== false);
+}
 function renderAssign() {
+  const pub = publishedAssignments();
   let h = '<p class="lede">One assignment sheet for each unit. Tick "Mark as done" to keep track for yourself. That tick is saved on this device only, and your faculty cannot see it.</p>';
-  h += ASSIGNMENTS.map(a => {
+  if (!pub.length) return h + '<p class="empty">No assignments posted yet. Check back soon.</p>';
+  h += pub.map(a => {
     const done = state.done.has(a.no), d = dueInfo(a, done), f = assignmentAsFile(a), u = unitOf(a.unit);
     return '<article class="assign' + (done ? ' is-done' : '') + '">' +
       '<div class="assign-top"><h3>Assignment ' + a.no + '</h3>' +
@@ -578,7 +582,7 @@ function renderInfo() {
 
 /* ---------- Search ---------- */
 function searchPool() {
-  return FILES.concat(ASSIGNMENTS.map(assignmentAsFile));
+  return FILES.concat(publishedAssignments().map(assignmentAsFile));
 }
 function matches(it, tokens) {
   const u = it.unit ? unitOf(it.unit) : null;
@@ -608,7 +612,7 @@ function renderNotices() {
     '</span></li>').join('') + '</ul>';
 }
 function renderFoot() {
-  const all = FILES.concat(ASSIGNMENTS).map(x => x.added).filter(Boolean).sort();
+  const all = FILES.concat(publishedAssignments()).map(x => x.added).filter(Boolean).sort();
   const last = all.length ? all[all.length - 1] : null;
   $('#foot').innerHTML = (last ? 'Last updated ' + fmtDay(last) + '. ' : '') +
     'Files open in Google Drive. If a link does not work, tell your faculty which file it was.';
@@ -618,7 +622,7 @@ function renderFoot() {
 const PANELS = { study: renderStudy, assign: renderAssign, quiz: renderQuiz, info: renderInfo };
 
 function updateCounts() {
-  const n = ASSIGNMENTS.filter(a => !state.done.has(a.no)).length;
+  const n = publishedAssignments().filter(a => !state.done.has(a.no)).length;
   const c = $('#tab-assign .count');
   c.hidden = n === 0;
   c.innerHTML = n + '<span class="sr"> not done</span>';
