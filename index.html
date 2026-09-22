@@ -615,7 +615,7 @@ function renderFoot() {
   const all = FILES.concat(publishedAssignments()).map(x => x.added).filter(Boolean).sort();
   const last = all.length ? all[all.length - 1] : null;
   $('#foot').innerHTML = (last ? 'Last updated ' + fmtDay(last) + '. ' : '') +
-    'Files open in Google Drive. If a link does not work, tell your faculty which file it was.';
+    'Files open in Google Drive. If a link does not work, tell me which file it was.';
 }
 
 /* ---------- render everything ---------- */
