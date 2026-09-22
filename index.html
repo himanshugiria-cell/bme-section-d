@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Basic Mechanical Engineering, Section D</title>
+<meta name="description" content="Lecture slides, student notes, assignments and quizzes for Basic Mechanical Engineering, B.Tech. first year, Section D.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<script>
+/* Apply saved theme before first paint so the page does not flash. */
+(function () {
+  try {
+    var t = localStorage.getItem('bme-d-theme');
+    if (t) document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+})();
+</script>
+<style>
+:root {
+  --paper: #EEF2F4;
+  --surface: #FFFFFF;
+  --ink: #14202A;
+  --muted: #556572;
+  --line: #C9D2D9;
+  --accent: #145A8A;
+  --accent-soft: #E2EDF5;
+  --on-accent: #FFFFFF;
+  --amber: #FFD15C;
+  --on-amber: #3A2900;
+  --danger: #B3261E;
+  --ok: #1C7443;
+  --pptx: #A8560B;
+  --pdf: #B3261E;
+  --form: #6A3FA0;
+  --docx: #145A8A;
+  --radius: 4px;
+  --font-body: 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-head: 'Barlow Condensed', 'Arial Narrow', system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0F171D; --surface: #16212A; --ink: #E7EDF1; --muted: #9AABB7; --line: #2C3B47;
+    --accent: #6DB4E4; --accent-soft: #1B2E3D; --on-accent: #0B1620;
+    --amber: #F2B83A; --on-amber: #2A1D00; --danger: #FF8F86; --ok: #6FD39B;
+    --pptx: #F0A15A; --pdf: #FF8F86; --form: #C3A2F0; --docx: #6DB4E4;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0F171D; --surface: #16212A; --ink: #E7EDF1; --muted: #9AABB7; --line: #2C3B47;
+  --accent: #6DB4E4; --accent-soft: #1B2E3D; --on-accent: #0B1620;
+  --amber: #F2B83A; --on-amber: #2A1D00; --danger: #FF8F86; --ok: #6FD39B;
+  --pptx: #F0A15A; --pdf: #FF8F86; --form: #C3A2F0; --docx: #6DB4E4;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 1rem/1.5 var(--font-body); }
+[hidden] { display: none !important; }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+.wrap { max-width: 58rem; margin: 0 auto; padding: 0 1rem 3rem; }
+.topbar { display: flex; justify-content: flex-end; padding: .6rem 0; }
+.theme-btn { font: 400 .9rem var(--font-body); background: none; border: 1px solid var(--line); color: var(--muted); border-radius: var(--radius); padding: .35rem .7rem; cursor: pointer; }
+.theme-btn:hover { color: var(--ink); border-color: var(--ink); }
+
+/* ---- Title block (like the corner of a drawing sheet) ---- */
+.titleblock { display: grid; grid-template-columns: 1fr auto; background: var(--surface); border: 2px solid var(--ink); }
+.tb-main { padding: 1.1rem 1.2rem 1.25rem; min-width: 0; }
+.tb-main h1 { margin: 0 0 .45rem; font: 700 clamp(2.1rem, 7vw, 3.4rem)/1 var(--font-head); letter-spacing: .005em; }
+.tb-main p { margin: 0; color: var(--muted); max-width: 34rem; }
+.tb-sec { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 6rem; padding: .5rem .9rem; background: var(--ink); color: var(--paper); }
+.tb-sec-label { font-size: .85rem; }
+.tb-sec-letter { font: 700 clamp(4rem, 14vw, 6.5rem)/.9 var(--font-head); }
+.tb-meta { grid-column: 1 / -1; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 2px solid var(--ink); }
+.tb-meta > div { padding: .6rem 1rem .7rem; min-width: 0; }
+.tb-meta > div + div { border-left: 1px solid var(--line); }
+.tb-meta dt { font-size: .85rem; color: var(--muted); }
+.tb-meta dd { margin: 0; font-weight: 600; }
+@media (max-width: 640px) {
+  .tb-meta { grid-template-columns: 1fr; }
+  .tb-meta > div + div { border-left: 0; border-top: 1px solid var(--line); }
+}
+
+/* ---- Search, notices, tabs ---- */
+.search { margin: 1rem 0 .75rem; }
+.search input { width: 100%; font: inherit; padding: .75rem .9rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: var(--ink); }
+.search input::placeholder { color: var(--muted); }
+
+.notices ul { list-style: none; margin: 0 0 1rem; padding: 0; }
+.notice { display: flex; gap: .75rem; padding: .7rem .9rem; background: var(--amber); color: var(--on-amber); border-radius: var(--radius); margin-bottom: .4rem; }
+.notice time { font-weight: 700; white-space: nowrap; }
+.notice a { color: inherit; font-weight: 600; }
+
+.tabs { position: sticky; top: 0; z-index: 20; display: flex; gap: .25rem; overflow-x: auto; background: var(--paper); border-bottom: 1px solid var(--line); scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { flex: 0 0 auto; display: inline-flex; align-items: center; gap: .45rem; font: 600 1rem var(--font-body); padding: .8rem 1rem; background: none; color: var(--muted); border: 0; cursor: pointer; }
+.tab:hover { color: var(--ink); }
+.tab[aria-selected="true"] { color: var(--ink); box-shadow: inset 0 -3px 0 var(--accent); }
+.count { min-width: 1.3rem; padding: .05rem .35rem; border-radius: 999px; background: var(--amber); color: var(--on-amber); font: 700 .78rem/1.3 var(--font-body); text-align: center; }
+
+main { padding-top: 1.25rem; }
+h2 { font: 700 1.5rem/1.15 var(--font-head); margin: 0 0 .6rem; }
+.lede { color: var(--muted); margin: 0 0 1rem; max-width: 42rem; }
+
+/* ---- Recently added ---- */
+.recent { margin-bottom: 1.6rem; }
+.recent ul { list-style: none; margin: 0; padding: 0; border: 1px solid var(--line); background: var(--surface); border-radius: var(--radius); }
+.recent li + li { border-top: 1px solid var(--line); }
+.recent-item { display: grid; grid-template-columns: 4.2rem 1fr auto; gap: .75rem; align-items: center; width: 100%; text-align: left; font: inherit; color: inherit; background: none; border: 0; padding: .7rem .9rem; cursor: pointer; }
+.recent-item:hover { background: var(--accent-soft); }
+.recent-when { color: var(--muted); font-variant-numeric: tabular-nums; }
+.recent-go { color: var(--accent); font-weight: 600; }
+
+/* ---- Study material ---- */
+.toolbar { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: space-between; align-items: center; margin: 0 0 .8rem; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--surface); }
+.seg button { font: 600 .95rem var(--font-body); padding: .5rem .95rem; border: 0; background: none; color: var(--muted); cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.plain-btn { font: 600 .95rem var(--font-body); background: none; border: 0; color: var(--accent); cursor: pointer; padding: .5rem .3rem; }
+
+.unit { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); margin-bottom: .6rem; scroll-margin-top: 4.5rem; }
+.unit summary { display: flex; align-items: center; gap: .9rem; padding: .8rem .9rem; cursor: pointer; list-style: none; }
+.unit summary::-webkit-details-marker { display: none; }
+.unit[open] summary { border-bottom: 1px solid var(--line); }
+.unit-no { flex: 0 0 auto; display: grid; place-items: center; width: 2.7rem; height: 2.7rem; border: 2px solid var(--ink); font: 700 1.5rem/1 var(--font-head); }
+.unit-head { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.unit-title { font: 600 1.4rem/1.15 var(--font-head); }
+.unit-count { color: var(--muted); font-size: .9rem; }
+.chev { flex: 0 0 auto; width: .6rem; height: .6rem; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); margin: 0 .35rem .25rem 0; }
+.unit[open] .chev { transform: rotate(-135deg); margin: .25rem .35rem 0 0; }
+.unit-body { padding: .9rem .9rem 1rem; }
+.unit-topics { margin: 0 0 .5rem; color: var(--muted); font-size: .95rem; max-width: 44rem; }
+.grp { font: 700 1.15rem/1.2 var(--font-head); margin: 1.1rem 0 .35rem; }
+
+.rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.row { display: grid; grid-template-columns: 3.4rem 1fr auto; gap: .75rem; align-items: center; padding: .6rem 0; border-bottom: 1px solid var(--line); }
+.row-standalone { background: var(--surface); padding-left: .8rem; padding-right: .8rem; }
+.rows-boxed { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+.rows-boxed .row { padding-left: .8rem; padding-right: .8rem; }
+.rows-boxed .row:last-child { border-bottom: 0; }
+.fmt { font: 700 .72rem/1 var(--font-body); text-align: center; padding: .32rem 0; border: 1px solid currentColor; border-radius: 3px; letter-spacing: .03em; }
+.fmt-PPTX { color: var(--pptx); } .fmt-PDF { color: var(--pdf); } .fmt-FORM { color: var(--form); } .fmt-DOCX { color: var(--docx); }
+.row-title { font-weight: 600; color: var(--ink); text-decoration: none; display: inline-block; padding: .15rem 0; }
+.row-title:hover { color: var(--accent); text-decoration: underline; }
+.row-meta { display: flex; flex-wrap: wrap; gap: .05rem .9rem; color: var(--muted); font-size: .875rem; }
+.row-dl { display: inline-flex; align-items: center; min-height: 2.5rem; padding: .3rem .75rem; border: 1px solid var(--line); border-radius: var(--radius); font: 600 .95rem var(--font-body); text-decoration: none; color: var(--accent); white-space: nowrap; }
+.row-dl:hover { border-color: var(--accent); background: var(--accent-soft); }
+.badge-new { display: inline-block; vertical-align: middle; margin-left: .35rem; background: var(--amber); color: var(--on-amber); font: 700 .72rem/1 var(--font-body); padding: .25rem .4rem; border-radius: 3px; }
+.unit summary .badge-new { margin-left: 0; }
+
+/* ---- Assignments ---- */
+.assign { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: var(--radius); padding: .9rem 1rem 1rem; margin-bottom: .7rem; }
+.assign.is-done { border-left-color: var(--ok); }
+.assign-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: .3rem .8rem; }
+.assign h3 { margin: 0; font: 700 1.45rem/1.15 var(--font-head); }
+.assign-sub { margin: .1rem 0 0; font-weight: 600; }
+.assign-meta { margin: .15rem 0 .85rem; color: var(--muted); font-size: .95rem; }
+.due { font-weight: 700; font-size: .95rem; }
+.due-open { color: var(--accent); }
+.due-soon { background: var(--amber); color: var(--on-amber); padding: .1rem .5rem; border-radius: 3px; }
+.due-late { color: var(--danger); }
+.due-none { color: var(--muted); font-weight: 400; }
+.due-ok { color: var(--ok); }
+.assign-actions { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
+.btn { display: inline-flex; align-items: center; min-height: 2.5rem; padding: .35rem .95rem; border: 1px solid var(--line); border-radius: var(--radius); font: 600 .95rem var(--font-body); text-decoration: none; color: var(--accent); background: var(--surface); cursor: pointer; }
+.btn:hover { border-color: var(--accent); }
+.btn-primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.check { display: inline-flex; gap: .5rem; align-items: center; margin-left: auto; min-height: 2.5rem; cursor: pointer; }
+.check input { width: 1.2rem; height: 1.2rem; accent-color: var(--ok); }
+
+/* ---- Course info ---- */
+.info section { margin-bottom: 2rem; }
+.marks { border-collapse: collapse; width: 100%; max-width: 26rem; background: var(--surface); border: 1px solid var(--line); margin-bottom: .6rem; }
+.marks th, .marks td { text-align: left; padding: .5rem .75rem; border-bottom: 1px solid var(--line); font-weight: 400; }
+.marks td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+.marks tfoot th, .marks tfoot td { font-weight: 700; border-bottom: 0; }
+.biblio { margin: 0; padding-left: 1.2rem; }
+.biblio li { margin-bottom: .4rem; max-width: 44rem; }
+
+.empty { padding: 1.4rem 1rem; border: 1px dashed var(--line); border-radius: var(--radius); color: var(--muted); background: var(--surface); }
+.result-count { color: var(--muted); margin: 0 0 .7rem; }
+footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <button type="button" class="theme-btn" id="themeBtn">Dark mode</button>
+  </div>
+
+  <header class="titleblock">
+    <div class="tb-main">
+      <h1>Basic Mechanical Engineering</h1>
+      <p>Lecture slides, student notes, assignments and quizzes for B.Tech. first year, Section D.</p>
+    </div>
+    <div class="tb-sec">
+      <span class="tb-sec-label">Section</span>
+      <span class="tb-sec-letter">D</span>
+    </div>
+    <dl class="tb-meta">
+      <div><dt>Course code</dt><dd>261ME3-08 / 262ME3-08</dd></div>
+      <div><dt>Faculty</dt><dd>Himanshu Giria</dd></div>
+      <div><dt>Institute</dt><dd>PIET, Department of Applied Sciences</dd></div>
+    </dl>
+  </header>
+
+  <div class="search">
+    <label for="q" class="sr">Search all files</label>
+    <input id="q" type="search" placeholder="Search all files, for example pump or lecture 12" autocomplete="off" enterkeyhint="search">
+  </div>
+
+  <section id="notices" class="notices" aria-label="Notices" hidden></section>
+
+  <div class="tabs" role="tablist" aria-label="Sections">
+    <button type="button" role="tab" class="tab" id="tab-study" data-tab="study" aria-controls="panel-study">Study material</button>
+    <button type="button" role="tab" class="tab" id="tab-assign" data-tab="assign" aria-controls="panel-assign">Assignments <span class="count" hidden></span></button>
+    <button type="button" role="tab" class="tab" id="tab-quiz" data-tab="quiz" aria-controls="panel-quiz">Quizzes</button>
+    <button type="button" role="tab" class="tab" id="tab-info" data-tab="info" aria-controls="panel-info">Course info</button>
+  </div>
+
+  <main>
+    <noscript><p class="empty">This page needs JavaScript to list the files. Please turn it on or try another browser.</p></noscript>
+    <section id="panel-study" role="tabpanel" aria-labelledby="tab-study"></section>
+    <section id="panel-assign" role="tabpanel" aria-labelledby="tab-assign" hidden></section>
+    <section id="panel-quiz" role="tabpanel" aria-labelledby="tab-quiz" hidden></section>
+    <section id="panel-info" role="tabpanel" aria-labelledby="tab-info" hidden></section>
+    <section id="panel-search" aria-live="polite" hidden></section>
+  </main>
+
+  <footer id="foot"></footer>
+</div>
+
+<script>
+(function () {
+'use strict';
+
+/* =====================================================================
+   EDIT HERE: everything students see comes from the lists below.
+
+   ADD A FILE  -> copy one line in FILES, then change:
+     type   'slides' | 'notes' | 'quiz' | 'syllabus'
+     unit   1 to 5
+     no     lecture number (slides only; 0 = zero lecture; leave out if none)
+     title  what students see (the "Lecture 12:" part is added for you)
+     file   paste the Google Drive share link, or just the file ID
+     url    use INSTEAD of file for a non-Drive link, such as a Google Form
+     added  date in YYYY-MM-DD  (files added in the last 3 days get a "New" tag)
+     kb     file size in KB (optional)
+     fmt    optional: 'PPTX', 'PDF', 'DOCX' (slides default to PPTX, notes to PDF)
+
+   Drive sharing must be "Anyone with the link: Viewer" or students get
+   an access-denied page.
+
+   Left out on purpose: the quiz PDFs (the last page has the teacher
+   answer key), and the Attendance and Course File folders.
+   ===================================================================== */
+
+const UNITS = [
+  { n: 1, roman: 'I',   hours: 4, title: 'Fundamentals, Robotics and Materials',
+    topics: 'Five branches of mechanical engineering (thermal, fluids, strength of materials, machine design, mechatronics). Control systems, motors, actuators, sensors and end effectors. Engineering materials and their properties.' },
+  { n: 2, roman: 'II',  hours: 5, title: 'Manufacturing Processes',
+    topics: 'Casting, moulding sand and furnaces. Forging, rolling, extrusion and drawing. Arc welding, gas welding, brazing and soldering. CNC and additive manufacturing.' },
+  { n: 3, roman: 'III', hours: 5, title: 'Pumps, Refrigeration and Air Conditioning',
+    topics: 'Reciprocating and centrifugal pumps. Refrigerants, COP and refrigeration systems. Window and split air conditioners.' },
+  { n: 4, roman: 'IV',  hours: 5, title: 'Transmission of Power',
+    topics: 'Belt drives, velocity ratio, slip, creep, belt length and tension ratio. Types of gears and gear trains.' },
+  { n: 5, roman: 'V',   hours: 5, title: 'Thermodynamics and IC Engines',
+    topics: 'Thermodynamic systems and properties, entropy, gas laws and the laws of thermodynamics. IC engine components and working, SI and CI engines. Electric and hybrid vehicles.' }
+];
+
+const FILES = [
+  // ---- Syllabus ----
+  { type:'syllabus', title:'Course information and syllabus, 2026-27', fmt:'PDF',  kb:322,  added:'2026-09-14', file:'11kx2Fau9yBiCgA8mwa0HXzEFHc8vEEEv' },
+  { type:'syllabus', title:'Official syllabus document (Word file)',   fmt:'DOCX', kb:3099, added:'2026-08-23', file:'12mFLLpY5-HK_2rPpxKKxcQN46a4XUB2u' },
+
+  // ---- Unit I ----
+  { type:'slides', unit:1, no:0, title:'Zero lecture',                          kb:2152, added:'2026-08-27', file:'1bAZZ2VKE92knBghDmJG_089k0FiCUto4' },
+  { type:'slides', unit:1, no:2, title:'Five fields of mechanical engineering', kb:6097, added:'2026-09-07', file:'1sBnRhuSc21MziYDvfDTIY7xIaYVghcdQ' },
+  { type:'slides', unit:1, no:3, title:'Robotics and automation',               kb:4271, added:'2026-09-07', file:'1SdPTd-qtDI1NpubOv4q0GzWGrk4uqHN9' },
+  { type:'slides', unit:1, no:4, title:'Engineering materials',                 kb:9807, added:'2026-09-07', file:'1LYz1RZmCJDUEgy_pi9LunPKUlzFVyDlU' },
+  { type:'notes',  unit:1, title:'Unit I student notes',                        kb:47,   added:'2026-09-07', file:'1mdkdfqKuVxh_gr5geOE62qn5WEeHeBos' },
+
+  // ---- Unit II ----
+  { type:'slides', unit:2, no:5, title:'Casting: introduction',                 kb:446,  added:'2026-09-15', file:'17RHJkPFgQ7rdqu9E85wxSdFNJNqHsjO4' },
+  { type:'slides', unit:2, no:6, title:'Moulding sand and furnaces',            kb:125,  added:'2026-09-16', file:'1HEcl9J_5Wsf0i9d0o4OgrNmcToGqtrzd' },
+  { type:'slides', unit:2, no:7, title:'Metal forming',                         kb:166,  added:'2026-09-16', file:'1zydkBK7_FX-YeHACYZciWgO2wjeGp_R2' },
+  { type:'slides', unit:2, no:8, title:'Welding, brazing and soldering',        kb:45,   added:'2026-09-16', file:'1uqv1rMN-4qGrLZ-iZvlMVZsmyE6tiGAb' },
+  { type:'slides', unit:2, no:9, title:'CNC and additive manufacturing',        kb:46,   added:'2026-09-16', file:'18JEKE8lJSvJO6kpUOKhcYSsNKiqFNL1L' },
+  { type:'slides', unit:2,       title:'Unit II final revision',                kb:46,   added:'2026-09-16', file:'1_B_yKVT6NiG0VR7DrYtd9pSCqa_bZAoj' },
+  { type:'notes',  unit:2, title:'Unit II student notes',                       kb:47,   added:'2026-09-07', file:'1y_dXWG4RueQKzZbcHynf4Dy2z0CfqMgQ' },
+  { type:'notes',  unit:2, title:'Unit II notes and questions',                 kb:8,    added:'2026-09-16', file:'17B2mogCcOBnhoaCGXfk4d7Uuu6gKMGW5' },
+  { type:'notes',  unit:2, title:'Lecture 6 notes: moulding sand and furnaces', kb:7,    added:'2026-09-16', file:'1shsajCkYMpKGf-tqDcgIdsX1o0Ink5_z' },
+  { type:'notes',  unit:2, title:'Lecture 6 notes, simplified',                 kb:5,    added:'2026-09-16', file:'1NhVVIHXmL2eVYhNi9nb666TjiPNLh_CD' },
+
+  // ---- Unit III ----
+  { type:'slides', unit:3, no:10, title:'Pumps: introduction',                       kb:49, added:'2026-09-19', file:'1rKhi44NsS5sfWRkBexQOKMmsTImz1Gy6' },
+  { type:'slides', unit:3, no:11, title:'Reciprocating pumps',                       kb:53, added:'2026-09-19', file:'1Kd2YtfUqAHWwsPQpJzaBjnPdMVuVfWlZ' },
+  { type:'slides', unit:3, no:12, title:'Centrifugal pumps',                         kb:52, added:'2026-09-19', file:'1vjnKTK-wo0GZe6qP7zPKoNeHcUbbLGU0' },
+  { type:'slides', unit:3, no:13, title:'Pump efficiency and selection',             kb:48, added:'2026-09-19', file:'1tssKtnUYh-wevcduBkeQ-krwA-ZaxT6-' },
+  { type:'slides', unit:3, no:14, title:'Refrigeration: introduction',               kb:48, added:'2026-09-19', file:'1foTDrBTgcSGki9HCN-p4-qvWh-Mq0rcV' },
+  { type:'slides', unit:3, no:15, title:'Refrigeration systems and refrigerants',    kb:45, added:'2026-09-19', file:'1mdDEZl0SrRaSMBoNi9n941G84FRn6KiO' },
+  { type:'slides', unit:3, no:16, title:'Air conditioning: window and split AC',     kb:48, added:'2026-09-19', file:'1HvvBa11j_qW8XSmQpgvagcHcDAfPsnT9' },
+  { type:'notes',  unit:3, title:'Pump notes',                                       kb:6,  added:'2026-09-19', file:'1sZteZAkHIC-valguNU7QOJayy_nnDMfR' },
+  { type:'notes',  unit:3, title:'Refrigeration notes',                              kb:5,  added:'2026-09-19', file:'1qVGoDwK14m9bedjty7Gz8sS9xjSP7P7R' },
+
+  // ---- Unit IV ----
+  { type:'slides', unit:4, no:17, title:'Transmission of power: belt drives',   kb:45, added:'2026-09-19', file:'17Kr-GfTgDFeGFZkgYrUg8sUF7EH8uqpH' },
+  { type:'slides', unit:4, no:18, title:'Flat belt tension',                    kb:44, added:'2026-09-19', file:'19VVvNoqzcNwjl5kvAlvxevohuwkbnsIh' },
+  { type:'slides', unit:4, no:19, title:'Gears and gear trains',                kb:67, added:'2026-09-19', file:'1gCKF-D314-holNZM7S5-Y1a2ec6ucBxX' },
+  { type:'notes',  unit:4, title:'Lecture 17 notes: transmission of power',     kb:5,  added:'2026-09-19', file:'1MNzFY52FYDfa4MOl2xQxDJA4Um7M5pLh' },
+  { type:'notes',  unit:4, title:'Lecture 18 notes: flat belt tension',         kb:5,  added:'2026-09-19', file:'1iXYULgg7AT9l97KkdL5qk9wELHBVSSvJ' },
+  { type:'notes',  unit:4, title:'Lecture 19 notes: gears and gear trains',     kb:5,  added:'2026-09-19', file:'1S9JaNf8FawcQr2x_sXiev2DgiStpWh3M' },
+
+  // ---- Unit V ----
+  { type:'slides', unit:5, no:20, title:'Thermodynamic systems and properties', kb:52, added:'2026-09-19', file:'1G7RsD9m_6RfB7Gdfp_5IhZM0p-qCcbeZ' },
+  { type:'slides', unit:5, no:21, title:'Gas laws and entropy',                 kb:51, added:'2026-09-19', file:'1yA-_hlHb6bLg8pUA7v_l9w87tTfyQ5z8' },
+  { type:'slides', unit:5, no:22, title:'Laws of thermodynamics',               kb:51, added:'2026-09-19', file:'120-4bDhn_i9r0Mu51C74-X0J5aCsxYcp' },
+  { type:'slides', unit:5, no:23, title:'IC engines: introduction and components', kb:52, added:'2026-09-19', file:'12ZdOkjtgd3VmorrwSswKEmQsRuI_TpXX' },
+  { type:'slides', unit:5, no:24, title:'SI and CI engine working',             kb:52, added:'2026-09-19', file:'1SNF3psheAg_lH408Xq8FduCLoukFmhXy' },
+  { type:'slides', unit:5, no:25, title:'Electric and hybrid vehicles',         kb:52, added:'2026-09-19', file:'1apHpajIfUd8uHUpRO0oIHYrtqf5S8W2M' },
+  { type:'notes',  unit:5, title:'Unit V student notes',                        kb:17, added:'2026-09-19', file:'1NlldCeNeNmZQYVyx8kDtHMaXG0aavSqO' },
+
+  // ---- Quizzes (Google Forms) ----
+  { type:'quiz', unit:2, title:'Unit II quiz',  added:'2026-09-19', url:'https://docs.google.com/forms/d/1uR8kHew7VkJfuGL0BaCCJZ3ZQkD4BzRXTR0UrZhQFGo/viewform' },
+  { type:'quiz', unit:3, title:'Unit III quiz', added:'2026-09-19', url:'https://docs.google.com/forms/d/1XRDy5Uu4xJUPSitW31n0i7NoKM5cVAZRnYBKcg7CBXc/viewform' },
+  { type:'quiz', unit:4, title:'Unit IV quiz',  added:'2026-09-19', url:'https://docs.google.com/forms/d/1gtnS7nBlc6pSF5lmj-yRHNkOEBhCdSptgF4mrgDbBXQ/viewform' }
+];
+
+/* ASSIGNMENTS: all five sheets are in one PDF today.
+   To set a deadline, fill in due:'YYYY-MM-DD'. Leave '' if not decided yet.
+   If you later split the PDF, give each assignment its own file:'...' and the page hint disappears. */
+const HOMEWORK_FILE = ''; // no longer used as a fallback: every assignment now has its own file
+const ASSIGNMENTS = [
+  { no:1, unit:1, title:'Fundamentals, Robotics and Materials',      questions:8, due:'', kb:66,  added:'2026-09-22', file:'1UzFpyufD_EMrXtb8VoVtAhbh3cxPyJ3j' },
+  { no:2, unit:2, title:'Manufacturing Processes',                    questions:8, due:'', kb:66,  added:'2026-09-22', file:'12YnjMRyzp6OQp6P5dFa5hRt2drAlBg4O' },
+  { no:3, unit:3, title:'Pumps, Refrigeration and Air Conditioning',  questions:8, due:'', kb:66,  added:'2026-09-22', file:'1Rjud5EzXijg-CYO6DsRB6PDCaxgxDYN3' },
+  { no:4, unit:4, title:'Transmission of Power',                      questions:8, due:'', kb:100, added:'2026-09-22', file:'1YObLoK5fxMiQ-742u_nGHxxhTNxoYlxh' },
+  { no:5, unit:5, title:'Thermodynamics and IC Engines',              questions:8, due:'', kb:66,  added:'2026-09-22', file:'1_ChHiMM_2xxYs3FAp_1qUPcVWlF1G6F4' }
+];
+
+/* NOTICES: short messages shown at the top of the page.
+   Example: { date:'2026-09-25', text:'Unit III quiz in class on Friday.', until:'2026-09-26', link:'', linkText:'' }
+   A notice disappears after its "until" date. */
+const ANNOUNCEMENTS = [
+];
+
+const COURSE = {
+  marks: [
+    { label: 'MTE 1', marks: 16 },
+    { label: 'MTE 2', marks: 16 },
+    { label: 'MTE 3', marks: 8 },
+    { label: 'End term exam (ETE)', marks: 60 }
+  ],
+  textbooks: [
+    'Basic Mechanical Engineering, G. Shanmugam and S. Ravindran, McGraw Hill Education, 4th edition, 2024.',
+    'Basic Mechanical Engineering, Praveen Kumar, Pearson India, 2nd edition, 2023.'
+  ],
+  references: [
+    'Basic Mechanical Engineering, C. M. Agrawal and Basant Agrawal, Wiley India, 1st edition, 2008.',
+    'Basic Mechanical Engineering, D. S. Kumar, S. K. Kataria and Sons, 1st edition, 2024 (reprint).',
+    'Basic Mechanical Engineering, Sadhu Singh, S. Chand Publishing, 1st edition, 2014.',
+    'Theory of Machine, R. S. Khurmi and J. K. Gupta, S. Chand Publishing, 14th edition, 2020.'
+  ],
+  links: [
+    { title: 'NPTEL online course (noc25_me09)', url: 'https://onlinecourses.nptel.ac.in/noc25_me09/preview' },
+    { title: 'Video recommended in the syllabus (YouTube)', url: 'https://www.youtube.com/watch?v=WKeXnD3dtug' }
+  ]
+};
+
+const NEW_DAYS = 3; // how many days a file keeps its "New" tag
+
+/* ===================== END OF EDITABLE DATA ===================== */
+
+
+/* ---------- helpers ---------- */
+const $ = (s, r) => (r || document).querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+};
+
+const today = new Date(); today.setHours(0, 0, 0, 0);
+const parseDay = s => { const p = s.split('-').map(Number); return new Date(p[0], p[1] - 1, p[2]); };
+const daysFromToday = s => Math.round((parseDay(s) - today) / 864e5);
+const fmtDay = s => {
+  const d = parseDay(s), o = { day: 'numeric', month: 'short' };
+  if (d.getFullYear() !== today.getFullYear()) o.year = 'numeric';
+  return d.toLocaleDateString('en-GB', o);
+};
+const isNew = it => { if (!it.added) return false; const ago = -daysFromToday(it.added); return ago >= 0 && ago <= NEW_DAYS; };
+
+const unitOf = n => UNITS.find(u => u.n === n);
+const TYPE_LABEL = { slides: 'Lecture slides', notes: 'Student notes', assignment: 'Assignment', quiz: 'Quiz', syllabus: 'Syllabus' };
+const TYPE_ORDER = { syllabus: 0, slides: 1, notes: 2, assignment: 3, quiz: 4 };
+
+function parseId(s) {
+  s = String(s || '');
+  let m = s.match(/\/d\/([\w-]+)/) || s.match(/[?&]id=([\w-]+)/);
+  return m ? m[1] : s.trim();
+}
+const viewUrl = it => it.url || ('https://drive.google.com/file/d/' + parseId(it.file) + '/view');
+const dlUrl = it => 'https://drive.google.com/uc?export=download&id=' + parseId(it.file);
+const fmtOf = it => it.fmt || ({ slides: 'PPTX', notes: 'PDF', assignment: 'PDF', quiz: 'FORM' }[it.type] || 'FILE');
+const sizeText = kb => kb >= 1000 ? (kb / 1000).toFixed(1) + ' MB' : kb + ' KB';
+
+function displayTitle(it) {
+  if (it.type === 'slides' && it.no != null && it.no > 0) return 'Lecture ' + it.no + ': ' + it.title;
+  return it.title;
+}
+function contextLabel(it, ctx) {
+  const u = it.unit ? 'Unit ' + unitOf(it.unit).roman : '';
+  if (ctx === 'search') return [u, TYPE_LABEL[it.type].toLowerCase()].filter(Boolean).join(', ');
+  return u;
+}
+
+/* ---------- state ---------- */
+function loadDone() {
+  try { return new Set(JSON.parse(store.get('bme-d-done') || '[]')); } catch (e) { return new Set(); }
+}
+const state = { tab: 'study', filter: 'all', q: '', open: new Set(), done: loadDone() };
+
+function latestUnit() {
+  let best = null;
+  FILES.forEach(f => {
+    if (!f.unit || (f.type !== 'slides' && f.type !== 'notes')) return;
+    if (!best || f.added > best.added || (f.added === best.added && f.unit > best.unit)) best = f;
+  });
+  return best ? best.unit : 1;
+}
+
+/* ---------- one file row ---------- */
+function rowHTML(it, ctx) {
+  const f = fmtOf(it), title = displayTitle(it), open = viewUrl(it);
+  const meta = [];
+  if (ctx === 'search' || ctx === 'flat') { const c = contextLabel(it, ctx); if (c) meta.push(esc(c)); }
+  if (it.kb) meta.push(sizeText(it.kb));
+  if (it.added) meta.push('Added ' + fmtDay(it.added));
+  const action = it.type === 'quiz'
+    ? '<a class="btn btn-primary" href="' + esc(open) + '" target="_blank" rel="noopener noreferrer">Start quiz</a>'
+    : '<a class="row-dl" href="' + esc(dlUrl(it)) + '" rel="noopener noreferrer" aria-label="Download ' + esc(title) + '">Download</a>';
+  return '<li class="row">' +
+    '<span class="fmt fmt-' + f + '">' + f + '</span>' +
+    '<div><a class="row-title" href="' + esc(open) + '" target="_blank" rel="noopener noreferrer">' + esc(title) + '</a>' +
+    (isNew(it) ? '<span class="badge-new">New</span>' : '') +
+    '<div class="row-meta">' + meta.map(m => '<span>' + m + '</span>').join('') + '</div></div>' +
+    action + '</li>';
+}
+
+/* ---------- Study material tab ---------- */
+function recentGroups() {
+  const map = new Map();
+  FILES.forEach(f => {
+    if (!f.unit || (f.type !== 'slides' && f.type !== 'notes')) return;
+    const k = f.added + '|' + f.unit;
+    if (!map.has(k)) map.set(k, { added: f.added, unit: f.unit, slides: 0, notes: 0 });
+    map.get(k)[f.type]++;
+  });
+  return Array.from(map.values())
+    .sort((a, b) => b.added.localeCompare(a.added) || b.unit - a.unit)
+    .slice(0, 4);
+}
+function groupText(g) {
+  const p = [];
+  if (g.slides) p.push(g.slides + (g.slides === 1 ? ' slide deck' : ' slide decks'));
+  if (g.notes) p.push(g.notes + (g.notes === 1 ? ' notes file' : ' notes files'));
+  return p.join(' and ');
+}
+
+function renderStudy() {
+  let h = '';
+  const groups = recentGroups();
+  if (groups.length) {
+    h += '<section class="recent"><h2>Recently added</h2><ul>' + groups.map(g =>
+      '<li><button type="button" class="recent-item" data-goto="' + g.unit + '">' +
+      '<span class="recent-when">' + fmtDay(g.added) + '</span>' +
+      '<span><strong>Unit ' + unitOf(g.unit).roman + '</strong>: ' + groupText(g) + '</span>' +
+      '<span class="recent-go">Open</span></button></li>'
+    ).join('') + '</ul></section>';
+  }
+
+  const allOpen = UNITS.every(u => state.open.has(u.n));
+  h += '<div class="toolbar">' +
+    '<div class="seg" role="group" aria-label="Show">' +
+    [['all', 'All'], ['slides', 'Slides'], ['notes', 'Notes']].map(x =>
+      '<button type="button" data-filter="' + x[0] + '" aria-pressed="' + (state.filter === x[0]) + '">' + x[1] + '</button>').join('') +
+    '</div>' +
+    '<button type="button" class="plain-btn" data-toggle-all>' + (allOpen ? 'Collapse all units' : 'Expand all units') + '</button>' +
+    '</div>';
+
+  h += UNITS.map(u => {
+    const mine = FILES.filter(f => f.unit === u.n && (f.type === 'slides' || f.type === 'notes'));
+    const slides = mine.filter(f => f.type === 'slides').sort((a, b) => (a.no == null ? 999 : a.no) - (b.no == null ? 999 : b.no));
+    const notes = mine.filter(f => f.type === 'notes');
+    const anyNew = mine.some(isNew);
+    const counts = mine.length ? slides.length + ' slides, ' + notes.length + ' notes' : 'Nothing uploaded yet';
+
+    let body = '<p class="unit-topics">' + esc(u.topics) + ' (' + u.hours + ' lecture hours)</p>';
+    if (!mine.length) {
+      body += '<p class="empty">Nothing has been uploaded for this unit yet.</p>';
+    } else {
+      if (state.filter !== 'notes') body += slides.length ? '<h3 class="grp">Lecture slides</h3><ul class="rows">' + slides.map(f => rowHTML(f, 'unit')).join('') + '</ul>' : '';
+      if (state.filter !== 'slides') body += notes.length ? '<h3 class="grp">Student notes</h3><ul class="rows">' + notes.map(f => rowHTML(f, 'unit')).join('') + '</ul>' : '';
+    }
+
+    return '<details class="unit" id="unit-' + u.n + '" data-unit="' + u.n + '"' + (state.open.has(u.n) ? ' open' : '') + '>' +
+      '<summary><span class="unit-no"><span class="sr">Unit </span>' + u.roman + '</span>' +
+      '<span class="unit-head"><span class="unit-title">' + esc(u.title) + '</span><span class="unit-count">' + counts + '</span></span>' +
+      (anyNew ? '<span class="badge-new">New</span>' : '') +
+      '<span class="chev" aria-hidden="true"></span></summary>' +
+      '<div class="unit-body">' + body + '</div></details>';
+  }).join('');
+  return h;
+}
+
+/* ---------- Assignments tab ---------- */
+function dueInfo(a, done) {
+  if (done) return { cls: 'ok', text: 'Done' };
+  if (!a.due) return { cls: 'none', text: 'Submission date not announced yet' };
+  const n = daysFromToday(a.due), when = fmtDay(a.due);
+  if (n < 0) return { cls: 'late', text: 'Overdue, was due ' + when };
+  if (n === 0) return { cls: 'soon', text: 'Due today' };
+  if (n === 1) return { cls: 'soon', text: 'Due tomorrow' };
+  if (n <= 3) return { cls: 'soon', text: 'Due ' + when + ', in ' + n + ' days' };
+  return { cls: 'open', text: 'Due ' + when + ', in ' + n + ' days' };
+}
+function assignmentAsFile(a) {
+  return { type: 'assignment', unit: a.unit, no: a.no, title: 'Assignment ' + a.no + ': ' + a.title, file: a.file, kb: a.kb, added: a.added, fmt: 'PDF' };
+}
+function renderAssign() {
+  let h = '<p class="lede">One assignment sheet for each unit. Tick "Mark as done" to keep track for yourself. That tick is saved on this device only, and your faculty cannot see it.</p>';
+  h += ASSIGNMENTS.map(a => {
+    const done = state.done.has(a.no), d = dueInfo(a, done), f = assignmentAsFile(a), u = unitOf(a.unit);
+    return '<article class="assign' + (done ? ' is-done' : '') + '">' +
+      '<div class="assign-top"><h3>Assignment ' + a.no + '</h3>' +
+      '<span class="due due-' + d.cls + '">' + esc(d.text) + '</span></div>' +
+      '<p class="assign-sub">' + esc(a.title) + (isNew(a) ? '<span class="badge-new">New</span>' : '') + '</p>' +
+      '<p class="assign-meta">Unit ' + u.roman + ', ' + a.questions + ' questions.</p>' +
+      '<div class="assign-actions">' +
+      '<a class="btn btn-primary" href="' + esc(viewUrl(f)) + '" target="_blank" rel="noopener noreferrer">Open PDF</a>' +
+      '<a class="btn" href="' + esc(dlUrl(f)) + '" rel="noopener noreferrer" aria-label="Download assignment ' + a.no + ' PDF">Download</a>' +
+      '<label class="check"><input type="checkbox" data-done="' + a.no + '"' + (done ? ' checked' : '') + '> Mark as done</label>' +
+      '</div></article>';
+  }).join('');
+  return h;
+}
+
+/* ---------- Quizzes tab ---------- */
+function renderQuiz() {
+  const q = FILES.filter(f => f.type === 'quiz').sort((a, b) => a.unit - b.unit);
+  if (!q.length) return '<p class="empty">No quizzes yet. They will appear here when your faculty adds them.</p>';
+  return '<p class="lede">Each quiz opens in Google Forms in a new tab.</p><ul class="rows rows-boxed">' + q.map(f => rowHTML(f, 'flat')).join('') + '</ul>';
+}
+
+/* ---------- Course info tab ---------- */
+function renderInfo() {
+  const syl = FILES.filter(f => f.type === 'syllabus');
+  const total = COURSE.marks.reduce((s, m) => s + m.marks, 0);
+  return '<div class="info">' +
+    '<section><h2>Syllabus</h2><ul class="rows rows-boxed">' + syl.map(f => rowHTML(f, 'flat')).join('') + '</ul></section>' +
+    '<section><h2>How marks are divided</h2><table class="marks"><tbody>' +
+    COURSE.marks.map(m => '<tr><th scope="row">' + esc(m.label) + '</th><td>' + m.marks + '</td></tr>').join('') +
+    '</tbody><tfoot><tr><th scope="row">Total</th><td>' + total + '</td></tr></tfoot></table>' +
+    '<p class="lede">MTE 1 to MTE 3 together make the 40 marks of internal assessment. The course has 2 lectures a week and 2 credits.</p></section>' +
+    '<section><h2>Textbooks</h2><ol class="biblio">' + COURSE.textbooks.map(t => '<li>' + esc(t) + '</li>').join('') + '</ol></section>' +
+    '<section><h2>Reference books</h2><ol class="biblio">' + COURSE.references.map(t => '<li>' + esc(t) + '</li>').join('') + '</ol></section>' +
+    '<section><h2>Useful links</h2><ul class="biblio">' + COURSE.links.map(l =>
+      '<li><a href="' + esc(l.url) + '" target="_blank" rel="noopener noreferrer">' + esc(l.title) + '</a></li>').join('') + '</ul></section>' +
+    '</div>';
+}
+
+/* ---------- Search ---------- */
+function searchPool() {
+  return FILES.concat(ASSIGNMENTS.map(assignmentAsFile));
+}
+function matches(it, tokens) {
+  const u = it.unit ? unitOf(it.unit) : null;
+  const hay = (displayTitle(it) + ' ' + TYPE_LABEL[it.type] + ' ' + fmtOf(it) + ' ' + (u ? 'unit ' + u.n + ' unit ' + u.roman + ' ' + u.title : '')).toLowerCase();
+  return tokens.every(t => /^\d+$/.test(t) ? new RegExp('(^|\\D)' + t + '(\\D|$)').test(hay) : hay.indexOf(t) !== -1);
+}
+function renderSearch() {
+  const q = state.q.trim(), tokens = q.toLowerCase().split(/\s+/).filter(Boolean);
+  const res = searchPool().filter(it => matches(it, tokens)).sort((a, b) =>
+    (a.unit || 0) - (b.unit || 0) || TYPE_ORDER[a.type] - TYPE_ORDER[b.type] || (a.no == null ? 999 : a.no) - (b.no == null ? 999 : b.no));
+  if (!res.length) {
+    return '<p class="empty">Nothing matches "' + esc(q) + '". Try a topic word such as pump, belt or casting, or a lecture number.</p>';
+  }
+  return '<p class="result-count">' + res.length + (res.length === 1 ? ' file matches "' : ' files match "') + esc(q) + '"</p>' +
+    '<ul class="rows rows-boxed">' + res.map(it => rowHTML(it, 'search')).join('') + '</ul>';
+}
+
+/* ---------- notices + footer ---------- */
+function renderNotices() {
+  const el = $('#notices');
+  const act = ANNOUNCEMENTS.filter(a => !a.until || daysFromToday(a.until) >= 0).sort((a, b) => b.date.localeCompare(a.date));
+  el.hidden = !act.length;
+  if (!act.length) return;
+  el.innerHTML = '<h2 class="sr">Notices</h2><ul>' + act.map(a =>
+    '<li class="notice"><time datetime="' + esc(a.date) + '">' + fmtDay(a.date) + '</time><span>' + esc(a.text) +
+    (a.link ? ' <a href="' + esc(a.link) + '" target="_blank" rel="noopener noreferrer">' + esc(a.linkText || 'Open') + '</a>' : '') +
+    '</span></li>').join('') + '</ul>';
+}
+function renderFoot() {
+  const all = FILES.concat(ASSIGNMENTS).map(x => x.added).filter(Boolean).sort();
+  const last = all.length ? all[all.length - 1] : null;
+  $('#foot').innerHTML = (last ? 'Last updated ' + fmtDay(last) + '. ' : '') +
+    'Files open in Google Drive. If a link does not work, tell your faculty which file it was.';
+}
+
+/* ---------- render everything ---------- */
+const PANELS = { study: renderStudy, assign: renderAssign, quiz: renderQuiz, info: renderInfo };
+
+function updateCounts() {
+  const n = ASSIGNMENTS.filter(a => !state.done.has(a.no)).length;
+  const c = $('#tab-assign .count');
+  c.hidden = n === 0;
+  c.innerHTML = n + '<span class="sr"> not done</span>';
+}
+function render() {
+  const searching = state.q.trim() !== '';
+  document.querySelectorAll('.tab').forEach(t => {
+    t.setAttribute('aria-selected', String(!searching && t.dataset.tab === state.tab));
+    t.tabIndex = t.dataset.tab === state.tab ? 0 : -1;
+  });
+  Object.keys(PANELS).forEach(k => {
+    const p = $('#panel-' + k);
+    p.hidden = searching || k !== state.tab;
+    if (!p.hidden) p.innerHTML = PANELS[k]();
+  });
+  const sp = $('#panel-search');
+  sp.hidden = !searching;
+  if (searching) sp.innerHTML = renderSearch();
+  updateCounts();
+}
+
+/* ---------- interactions ---------- */
+const HASH = { study: 'study', assign: 'assignments', quiz: 'quizzes', info: 'info' };
+function setTab(t) {
+  state.tab = t; state.q = ''; $('#q').value = '';
+  try { history.replaceState(null, '', '#' + HASH[t]); } catch (e) {}
+  render();
+}
+
+document.addEventListener('click', function (e) {
+  const t = e.target.closest('[data-tab],[data-filter],[data-goto],[data-toggle-all]');
+  if (!t) return;
+  if (t.dataset.tab) { setTab(t.dataset.tab); return; }
+  if (t.dataset.filter) { state.filter = t.dataset.filter; render(); return; }
+  if (t.hasAttribute('data-toggle-all')) {
+    const allOpen = UNITS.every(u => state.open.has(u.n));
+    UNITS.forEach(u => allOpen ? state.open.delete(u.n) : state.open.add(u.n));
+    render(); return;
+  }
+  if (t.dataset.goto) {
+    const n = +t.dataset.goto;
+    state.open.add(n); state.filter = 'all';
+    render();
+    const el = document.getElementById('unit-' + n);
+    if (el) el.scrollIntoView({ block: 'start' });
+  }
+});
+
+document.addEventListener('change', function (e) {
+  if (!e.target.matches('[data-done]')) return;
+  const n = +e.target.dataset.done;
+  e.target.checked ? state.done.add(n) : state.done.delete(n);
+  store.set('bme-d-done', JSON.stringify(Array.from(state.done)));
+  render();
+});
+
+/* keep open/closed state of unit sections (toggle does not bubble, so use capture) */
+document.addEventListener('toggle', function (e) {
+  const d = e.target;
+  if (!d.matches || !d.matches('details.unit')) return;
+  const n = +d.dataset.unit;
+  d.open ? state.open.add(n) : state.open.delete(n);
+}, true);
+
+$('#q').addEventListener('input', function (e) { state.q = e.target.value; render(); });
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === '/' && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) {
+    e.preventDefault(); $('#q').focus();
+  }
+  if (e.key === 'Escape' && document.activeElement === $('#q') && state.q) { state.q = ''; $('#q').value = ''; render(); }
+});
+
+$('.tabs').addEventListener('keydown', function (e) {
+  if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+  const tabs = Array.from(document.querySelectorAll('.tab')), i = tabs.indexOf(document.activeElement);
+  if (i < 0) return;
+  const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length];
+  next.focus(); next.click();
+});
+
+/* theme */
+const themeBtn = $('#themeBtn');
+const isDark = () => (document.documentElement.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')) === 'dark';
+function syncThemeBtn() { themeBtn.textContent = isDark() ? 'Light mode' : 'Dark mode'; }
+themeBtn.addEventListener('click', function () {
+  const next = isDark() ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  store.set('bme-d-theme', next);
+  syncThemeBtn();
+});
+
+/* ---------- start ---------- */
+(function init() {
+  const h = (location.hash || '').replace('#', '');
+  const found = Object.keys(HASH).find(k => HASH[k] === h);
+  if (found) state.tab = found;
+  state.open.add(latestUnit());
+  syncThemeBtn();
+  renderNotices();
+  renderFoot();
+  render();
+})();
+
+})();
+</script>
+</body>
+</html>
