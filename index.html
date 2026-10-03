@@ -22,8 +22,8 @@
   --paper: #FFFFFF;
   --surface: #FFFFFF;
   --ink: #1A1A1A;
-  --muted: #8A8A8A;
-  --faint: #C8C8C8;
+  --muted: #595959;
+  --faint: #666666;
   --line: #E7E7E7;
   --on-ink: #FFFFFF;
   --radius: 2px;
@@ -31,11 +31,11 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #121212; --surface: #121212; --ink: #EDEDED; --muted: #8F8F8F; --faint: #4A4A4A; --line: #2A2A2A; --on-ink: #121212;
+    --paper: #121212; --surface: #121212; --ink: #EDEDED; --muted: #B8B8B8; --faint: #A8A8A8; --line: #2A2A2A; --on-ink: #121212;
   }
 }
 :root[data-theme="dark"] {
-  --paper: #121212; --surface: #121212; --ink: #EDEDED; --muted: #8F8F8F; --faint: #4A4A4A; --line: #2A2A2A; --on-ink: #121212;
+  --paper: #121212; --surface: #121212; --ink: #EDEDED; --muted: #B8B8B8; --faint: #A8A8A8; --line: #2A2A2A; --on-ink: #121212;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -67,7 +67,7 @@ a { color: var(--ink); text-underline-offset: 3px; }
 .search { margin: 1.75rem 0 1.25rem; }
 .search input { width: 100%; font: inherit; padding: .6rem 0; border: 0; border-bottom: 1px solid var(--line); background: none; color: var(--ink); }
 .search input::placeholder { color: var(--faint); }
-.search input:focus { border-bottom-color: var(--ink); outline: none; }
+.search input:focus { border-bottom-color: var(--ink); outline: 2px solid var(--ink); outline-offset: 3px; }
 
 .notices ul { list-style: none; margin: 0 0 1.5rem; padding: 0; }
 .notice { display: flex; gap: 1rem; padding: .1rem 0 .9rem; }
@@ -159,6 +159,17 @@ h2 { font: 400 1.35rem/1.3 var(--font-body); margin: 0 0 .5rem; letter-spacing: 
 .empty { padding: 1.25rem 0; color: var(--faint); font-size: .95rem; }
 .result-count { color: var(--faint); margin: 0 0 1rem; font-size: .9rem; }
 footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--line); color: var(--faint); font-size: .85rem; }
+@media (max-width: 480px) {
+  .tabs { gap: 1rem; flex-wrap: wrap; overflow-x: visible; }
+  .tab { min-height: 44px; }
+  .theme-btn, .plain-btn, .seg button, .row-dl, .btn { min-height: 44px; display: inline-flex; align-items: center; }
+  .unit-body { padding-left: 0; }
+  .row { grid-template-columns: 2.5rem 1fr; gap: .5rem; }
+  .row-dl, .row > .btn { grid-column: 2; justify-self: start; }
+  .recent-item { grid-template-columns: 3.5rem 1fr; }
+  .recent-go { grid-column: 2; }
+  .check { margin-left: 0; min-height: 44px; }
+}
 </style>
 </head>
 <body>
@@ -297,9 +308,9 @@ const FILES = [
   { type:'notes',  unit:5, title:'Unit V student notes',                        kb:17, added:'2026-09-19', file:'1NlldCeNeNmZQYVyx8kDtHMaXG0aavSqO' },
 
   // ---- Quizzes (Google Forms) ----
-  { type:'quiz', unit:2, title:'Unit II quiz',  added:'2026-09-19', url:'https://docs.google.com/forms/d/1uR8kHew7VkJfuGL0BaCCJZ3ZQkD4BzRXTR0UrZhQFGo/viewform' },
-  { type:'quiz', unit:3, title:'Unit III quiz', added:'2026-09-19', url:'https://docs.google.com/forms/d/1XRDy5Uu4xJUPSitW31n0i7NoKM5cVAZRnYBKcg7CBXc/viewform' },
-  { type:'quiz', unit:4, title:'Unit IV quiz',  added:'2026-09-19', url:'https://docs.google.com/forms/d/1gtnS7nBlc6pSF5lmj-yRHNkOEBhCdSptgF4mrgDbBXQ/viewform' }
+  { type:'quiz', unit:2, title:'Unit II quiz: Manufacturing Processes',  added:'2026-09-19', url:'https://docs.google.com/forms/d/1uR8kHew7VkJfuGL0BaCCJZ3ZQkD4BzRXTR0UrZhQFGo/viewform' },
+  { type:'quiz', unit:3, title:'Unit III quiz: Pumps, Refrigeration and Air Conditioning', added:'2026-09-19', url:'https://docs.google.com/forms/d/1XRDy5Uu4xJUPSitW31n0i7NoKM5cVAZRnYBKcg7CBXc/viewform' },
+  { type:'quiz', unit:4, title:'Unit IV quiz: Transmission of Power',  added:'2026-09-19', url:'https://docs.google.com/forms/d/1gtnS7nBlc6pSF5lmj-yRHNkOEBhCdSptgF4mrgDbBXQ/viewform' }
 ];
 
 /* ASSIGNMENTS: each is its own PDF, one per unit.
@@ -317,11 +328,12 @@ const ASSIGNMENTS = [
    Example: { date:'2026-09-25', text:'Unit III quiz in class on Friday.', until:'2026-09-26', link:'', linkText:'' }
    A notice disappears after its "until" date. */
 const ANNOUNCEMENTS = [
+  { date:'2026-10-03', text:'Unit II follow-up: revisit the Manufacturing Processes slides and notes, especially any questions you found difficult in the in-class quiz.', until:'2026-10-10', link:'', linkText:'' }
 ];
 
 const COURSE = {
   marks: [
-    { label: 'MTE 1', marks: 16 },
+    { label: 'Mid-term examination (MTE) 1', marks: 16 },
     { label: 'MTE 2', marks: 16 },
     { label: 'MTE 3', marks: 8 },
     { label: 'End term exam (ETE)', marks: 60 }
@@ -412,7 +424,7 @@ function rowHTML(it, ctx) {
   if (it.kb) meta.push(sizeText(it.kb));
   if (it.added) meta.push('Added ' + fmtDay(it.added));
   const action = it.type === 'quiz'
-    ? '<a class="btn btn-primary" href="' + esc(open) + '" target="_blank" rel="noopener noreferrer">Start quiz</a>'
+    ? '<a class="btn btn-primary" href="' + esc(open) + '" target="_blank" rel="noopener noreferrer">Open quiz</a>'
     : '<a class="row-dl" href="' + esc(dlUrl(it)) + '" rel="noopener noreferrer" aria-label="Download ' + esc(title) + '">Download</a>';
   return '<li class="row">' +
     '<span class="fmt fmt-' + f + '">' + f + '</span>' +
@@ -446,7 +458,7 @@ function renderStudy() {
   let h = '';
   const groups = recentGroups();
   if (groups.length) {
-    h += '<section class="recent"><h2>Recently added</h2><ul>' + groups.map(g =>
+    h += '<section class="recent"><h2>Recent uploads</h2><p class="lede">Files added on each date; open a unit to see all its materials.</p><ul>' + groups.map(g =>
       '<li><button type="button" class="recent-item" data-goto="' + g.unit + '">' +
       '<span class="recent-when">' + fmtDay(g.added) + '</span>' +
       '<span><strong>Unit ' + unitOf(g.unit).roman + '</strong>: ' + groupText(g) + '</span>' +
@@ -490,11 +502,9 @@ function renderStudy() {
 
 /* ---------- Assignments tab ---------- */
 function dueInfo(a, done) {
-  if (done) return { cls: 'ok', text: 'Done' };
   if (!a.due) return { cls: 'none', text: 'Submission date not announced yet' };
-  const n = daysFromToday(a.due), when = fmtDay(a.due);
-  if (n < -3) return { cls: 'closed', text: 'Submission closed, was due ' + when };
-  if (n < 0) return { cls: 'late', text: 'Overdue, was due ' + when };
+  const n = daysFromToday(a.due), when = fmtDay(a.due) + ' ' + a.due.slice(0, 4);
+  if (n < 0) return { cls: 'late', text: 'Deadline passed: ' + when };
   if (n === 0) return { cls: 'soon', text: 'Due today' };
   if (n === 1) return { cls: 'soon', text: 'Due tomorrow' };
   if (n <= 3) return { cls: 'soon', text: 'Due ' + when + ', in ' + n + ' days' };
@@ -508,7 +518,7 @@ function publishedAssignments() {
 }
 function renderAssign() {
   const pub = publishedAssignments();
-  let h = '<p class="lede">One assignment sheet for each unit. Tick "Mark as done" to keep track for yourself. That tick is saved on this device only, and your faculty cannot see it.</p>';
+  let h = '<p class="lede">One assignment sheet for each unit. Tick "Completed (my tracker)" for your own records. This does not submit your assignment or confirm faculty checking. Ticks are saved on this device only; your faculty cannot see them. Follow the submission instructions given in class. If you missed a deadline, ask your faculty about late submission.</p>';
   if (!pub.length) return h + '<p class="empty">No assignments posted yet. Check back soon.</p>';
   h += pub.map(a => {
     const done = state.done.has(a.no), d = dueInfo(a, done), f = assignmentAsFile(a), u = unitOf(a.unit);
@@ -520,7 +530,7 @@ function renderAssign() {
       '<div class="assign-actions">' +
       '<a class="btn btn-primary" href="' + esc(viewUrl(f)) + '" target="_blank" rel="noopener noreferrer">Open PDF</a>' +
       '<a class="btn" href="' + esc(dlUrl(f)) + '" rel="noopener noreferrer" aria-label="Download assignment ' + a.no + ' PDF">Download</a>' +
-      '<label class="check"><input type="checkbox" data-done="' + a.no + '"' + (done ? ' checked' : '') + '> Mark as done</label>' +
+      '<label class="check"><input type="checkbox" data-done="' + a.no + '"' + (done ? ' checked' : '') + '> Completed (my tracker)</label>' +
       '</div></article>';
   }).join('');
   return h;
@@ -530,7 +540,7 @@ function renderAssign() {
 function renderQuiz() {
   const q = FILES.filter(f => f.type === 'quiz').sort((a, b) => a.unit - b.unit);
   if (!q.length) return '<p class="empty">No quizzes yet. They will appear here when your faculty adds them.</p>';
-  return '<p class="lede">Each quiz opens in Google Forms in a new tab.</p><ul class="rows rows-boxed">' + q.map(f => rowHTML(f, 'flat')).join('') + '</ul>';
+  return '<p class="lede">Each quiz opens in Google Forms in a new tab. Read the form instructions before starting. Follow the instructions given in class about whether the quiz counts towards assessment, the time allowed, and repeat attempts.</p><ul class="rows rows-boxed">' + q.map(f => rowHTML(f, 'flat')).join('') + '</ul>';
 }
 
 /* ---------- Course info tab ---------- */
@@ -576,7 +586,7 @@ function renderNotices() {
   const act = ANNOUNCEMENTS.filter(a => !a.until || daysFromToday(a.until) >= 0).sort((a, b) => b.date.localeCompare(a.date));
   el.hidden = !act.length;
   if (!act.length) return;
-  el.innerHTML = '<h2 class="sr">Notices</h2><ul>' + act.map(a =>
+  el.innerHTML = '<h2>Class update</h2><ul>' + act.map(a =>
     '<li class="notice"><time datetime="' + esc(a.date) + '">' + fmtDay(a.date) + '</time><span>' + esc(a.text) +
     (a.link ? ' <a href="' + esc(a.link) + '" target="_blank" rel="noopener noreferrer">' + esc(a.linkText || 'Open') + '</a>' : '') +
     '</span></li>').join('') + '</ul>';
@@ -584,8 +594,8 @@ function renderNotices() {
 function renderFoot() {
   const all = FILES.concat(publishedAssignments()).map(x => x.added).filter(Boolean).sort();
   const last = all.length ? all[all.length - 1] : null;
-  $('#foot').innerHTML = (last ? 'Last updated ' + fmtDay(last) + '. ' : '') +
-    'Files open in Google Drive. If a link does not work, tell me which file it was.';
+  $('#foot').innerHTML = (last ? 'Latest file upload: ' + fmtDay(last) + ' ' + last.slice(0, 4) + '. ' : '') +
+    'Site revised 3 Oct 2026. Materials open in Google Drive; quizzes open in Google Forms. If a link does not work, tell Himanshu Giria in class which file it was and what error appeared.';
 }
 
 /* ---------- render everything ---------- */
@@ -595,7 +605,7 @@ function updateCounts() {
   const n = publishedAssignments().filter(a => !state.done.has(a.no)).length;
   const c = $('#tab-assign .count');
   c.hidden = n === 0;
-  c.innerHTML = n + '<span class="sr"> not done</span>';
+  c.innerHTML = n + ' unchecked';
 }
 function render() {
   const searching = state.q.trim() !== '';
@@ -701,3 +711,4 @@ themeBtn.addEventListener('click', function () {
 </script>
 </body>
 </html>
+
