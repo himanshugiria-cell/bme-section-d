@@ -272,7 +272,7 @@ const FILES = [
   { type:'slides', unit:2, no:6, title:'Moulding sand and furnaces',            kb:125,  added:'2026-09-16', file:'1HEcl9J_5Wsf0i9d0o4OgrNmcToGqtrzd' },
   { type:'slides', unit:2, no:7, title:'Metal forming',                         kb:166,  added:'2026-09-16', file:'1zydkBK7_FX-YeHACYZciWgO2wjeGp_R2' },
   { type:'slides', unit:2, no:8, title:'Welding, brazing and soldering',        kb:45,   added:'2026-09-16', file:'1uqv1rMN-4qGrLZ-iZvlMVZsmyE6tiGAb' },
-  { type:'slides', unit:2, no:9, title:'CNC and additive manufacturing',        kb:46,   added:'2026-09-16', file:'18JEKE8lJSvJO6kpUOKhcYSsNKiqFNL1L' },
+  { type:'slides', unit:2, no:9, title:'Machining, CNC and 3D printing', fmt:'SLIDES', added:'2026-10-04', url:'https://docs.google.com/presentation/d/1UDUqqkoAfRBdV_mQBNWTUsH3Lo6fBAZFQQDHG6dtNBU/edit' },
   { type:'slides', unit:2,       title:'Unit II final revision',                kb:46,   added:'2026-09-16', file:'1_B_yKVT6NiG0VR7DrYtd9pSCqa_bZAoj' },
   { type:'notes',  unit:2, title:'Unit II student notes',                       kb:47,   added:'2026-09-07', file:'1y_dXWG4RueQKzZbcHynf4Dy2z0CfqMgQ' },
   { type:'notes',  unit:2, title:'Unit II notes and questions',                 kb:8,    added:'2026-09-16', file:'17B2mogCcOBnhoaCGXfk4d7Uuu6gKMGW5' },
@@ -427,6 +427,8 @@ function rowHTML(it, ctx) {
   if (it.added) meta.push('Added ' + fmtDay(it.added));
   const action = it.type === 'quiz'
     ? '<a class="btn btn-primary" href="' + esc(open) + '" target="_blank" rel="noopener noreferrer">Open quiz</a>'
+    : f === 'SLIDES'
+    ? '<a class="row-dl" href="' + esc(open) + '" target="_blank" rel="noopener noreferrer">Open slides</a>'
     : '<a class="row-dl" href="' + esc(dlUrl(it)) + '" rel="noopener noreferrer" aria-label="Download ' + esc(title) + '">Download</a>';
   return '<li class="row">' +
     '<span class="fmt fmt-' + f + '">' + f + '</span>' +
@@ -597,7 +599,7 @@ function renderFoot() {
   const all = FILES.concat(publishedAssignments()).map(x => x.added).filter(Boolean).sort();
   const last = all.length ? all[all.length - 1] : null;
   $('#foot').innerHTML = (last ? 'Latest file upload: ' + fmtDay(last) + ' ' + last.slice(0, 4) + '. ' : '') +
-    'Site revised 3 Oct 2026. Materials open in Google Drive; quizzes open in Google Forms. If a link does not work, tell Himanshu Giria in class which file it was and what error appeared.';
+    'Site revised 4 Oct 2026. Materials open in Google Drive; quizzes open in Google Forms. If a link does not work, tell Himanshu Giria in class which file it was and what error appeared.';
 }
 
 /* ---------- render everything ---------- */
