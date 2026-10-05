@@ -281,7 +281,7 @@ const FILES = [
 
   // ---- Unit III ----
   { type:'slides', unit:3, no:10, title:'Pumps: introduction',                       kb:49, added:'2026-09-19', file:'1rKhi44NsS5sfWRkBexQOKMmsTImz1Gy6' },
-  { type:'slides', unit:3, no:11, title:'Reciprocating pumps',                       kb:53, added:'2026-09-19', file:'1Kd2YtfUqAHWwsPQpJzaBjnPdMVuVfWlZ' },
+  { type:'slides', unit:3, no:11, title:'Reciprocating pumps: working, applications and efficiency', fmt:'SLIDES', added:'2026-10-05', url:'https://docs.google.com/presentation/d/1yt_-DDwRBJLmfre-G70rMv2aEcUFNIU8flPJrYT9IrY/edit' },
   { type:'slides', unit:3, no:12, title:'Centrifugal pumps',                         kb:52, added:'2026-09-19', file:'1vjnKTK-wo0GZe6qP7zPKoNeHcUbbLGU0' },
   { type:'slides', unit:3, no:13, title:'Pump efficiency and selection',             kb:48, added:'2026-09-19', file:'1tssKtnUYh-wevcduBkeQ-krwA-ZaxT6-' },
   { type:'slides', unit:3, no:14, title:'Refrigeration: introduction',               kb:48, added:'2026-09-19', file:'1foTDrBTgcSGki9HCN-p4-qvWh-Mq0rcV' },
@@ -599,7 +599,7 @@ function renderFoot() {
   const all = FILES.concat(publishedAssignments()).map(x => x.added).filter(Boolean).sort();
   const last = all.length ? all[all.length - 1] : null;
   $('#foot').innerHTML = (last ? 'Latest file upload: ' + fmtDay(last) + ' ' + last.slice(0, 4) + '. ' : '') +
-    'Site revised 4 Oct 2026. Materials open in Google Drive; quizzes open in Google Forms. If a link does not work, tell Himanshu Giria in class which file it was and what error appeared.';
+    'Site revised 5 Oct 2026. Materials open in Google Drive; quizzes open in Google Forms. If a link does not work, tell Himanshu Giria in class which file it was and what error appeared.';
 }
 
 /* ---------- render everything ---------- */
