@@ -460,16 +460,6 @@ function groupText(g) {
 
 function renderStudy() {
   let h = '';
-  const groups = recentGroups();
-  if (groups.length) {
-    h += '<section class="recent"><h2>Recent uploads</h2><p class="lede">Files added on each date; open a unit to see all its materials.</p><ul>' + groups.map(g =>
-      '<li><button type="button" class="recent-item" data-goto="' + g.unit + '">' +
-      '<span class="recent-when">' + fmtDay(g.added) + '</span>' +
-      '<span><strong>Unit ' + unitOf(g.unit).roman + '</strong>: ' + groupText(g) + '</span>' +
-      '<span class="recent-go">Open</span></button></li>'
-    ).join('') + '</ul></section>';
-  }
-
   const allOpen = UNITS.every(u => state.open.has(u.n));
   h += '<div class="toolbar">' +
     '<div class="seg" role="group" aria-label="Show">' +
