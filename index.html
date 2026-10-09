@@ -600,7 +600,7 @@ function renderFoot() {
   const all = FILES.concat(publishedAssignments()).map(x => x.added).filter(Boolean).sort();
   const last = all.length ? all[all.length - 1] : null;
   $('#foot').innerHTML = (last ? 'Latest file upload: ' + fmtDay(last) + ' ' + last.slice(0, 4) + '. ' : '') +
-    'Site revised 9 Oct 2026. Materials open on this site or in Google Drive; quizzes open in Google Forms. If a link does not work, tell Himanshu Giria in class which file it was and what error appeared.';
+    'Site revised 9 Oct 2026. Materials open on this site or in Google Drive; quizzes open in Google Forms. If you have trouble opening a file, tell me in class or email me at <a href="mailto:himanshu.giria@poornima.org">himanshu.giria@poornima.org</a>. Mention which file it was and what error appeared; a screenshot would help.';
 }
 
 /* ---------- render everything ---------- */
