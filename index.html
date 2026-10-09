@@ -246,7 +246,7 @@ const UNITS = [
   { n: 1, roman: 'I',   hours: 4, title: 'Fundamentals, Robotics and Materials',
     topics: 'Five branches of mechanical engineering (thermal, fluids, strength of materials, machine design, mechatronics). Control systems, motors, actuators, sensors and end effectors. Engineering materials and their properties.' },
   { n: 2, roman: 'II',  hours: 5, title: 'Manufacturing Processes',
-    topics: 'Casting, moulding sand and furnaces. Forging, rolling, extrusion and drawing. Arc welding, gas welding, brazing and soldering. CNC and additive manufacturing.' },
+    topics: 'Casting, moulding sand and furnaces. Forging, rolling, extrusion and drawing. Arc welding, gas welding, brazing and soldering. Newer machining methods, CNC and additive manufacturing.' },
   { n: 3, roman: 'III', hours: 5, title: 'Pumps, Refrigeration and Air Conditioning',
     topics: 'Reciprocating and centrifugal pumps. Refrigerants, COP and refrigeration systems. Window and split air conditioners.' },
   { n: 4, roman: 'IV',  hours: 5, title: 'Transmission of Power',
@@ -254,6 +254,11 @@ const UNITS = [
   { n: 5, roman: 'V',   hours: 5, title: 'Thermodynamics and IC Engines',
     topics: 'Thermodynamic systems and properties, entropy, gas laws and the laws of thermodynamics. IC engine components and working, SI and CI engines. Electric and hybrid vehicles.' }
 ];
+
+const STUDY_TOGETHER = {
+  1: 'Read Unit I student notes together with the new motors, control and materials supplement, Lectures 2–4, Assignment 1 and the revision quiz explanations. The original handout is a concise summary.',
+  2: 'Read Unit II student notes together with the new manufacturing supplement, current Lecture 9, Assignment 2 and the quiz explanations. Use Lecture 6 notes for sand and furnaces; the simplified version is an alternative. Read Unit II notes and questions with the CNC clarification in the new supplement.'
+};
 
 const FILES = [
   // ---- Syllabus ----
@@ -265,6 +270,7 @@ const FILES = [
   { type:'slides', unit:1, no:2, title:'Five fields of mechanical engineering', kb:6097, added:'2026-09-07', file:'1sBnRhuSc21MziYDvfDTIY7xIaYVghcdQ' },
   { type:'slides', unit:1, no:3, title:'Robotics and automation',               kb:4271, added:'2026-09-07', file:'1SdPTd-qtDI1NpubOv4q0GzWGrk4uqHN9' },
   { type:'slides', unit:1, no:4, title:'Engineering materials',                 kb:9807, added:'2026-09-07', file:'1LYz1RZmCJDUEgy_pi9LunPKUlzFVyDlU' },
+  { type:'notes', unit:1, title:'Unit I supplement: motors, control, robotics and materials — read with original notes', fmt:'HTML', added:'2026-10-09', url:'./notes/unit-i-supplement.html', pdf:'https://drive.google.com/file/d/1AGk5MlPvpTtHVpw-apsSa40MnGGhO2nH/view' },
   { type:'notes',  unit:1, title:'Unit I student notes',                        kb:47,   added:'2026-09-07', file:'1mdkdfqKuVxh_gr5geOE62qn5WEeHeBos' },
 
   // ---- Unit II ----
@@ -274,6 +280,7 @@ const FILES = [
   { type:'slides', unit:2, no:8, title:'Welding, brazing and soldering',        kb:45,   added:'2026-09-16', file:'1uqv1rMN-4qGrLZ-iZvlMVZsmyE6tiGAb' },
   { type:'slides', unit:2, no:9, title:'Machining, CNC and 3D printing', fmt:'SLIDES', added:'2026-10-04', url:'https://docs.google.com/presentation/d/1UDUqqkoAfRBdV_mQBNWTUsH3Lo6fBAZFQQDHG6dtNBU/edit' },
   { type:'slides', unit:2,       title:'Unit II final revision',                kb:46,   added:'2026-09-16', file:'1_B_yKVT6NiG0VR7DrYtd9pSCqa_bZAoj' },
+  { type:'notes', unit:2, title:'Unit II supplement: manufacturing details and assignment support — read with original notes', fmt:'HTML', added:'2026-10-09', url:'./notes/unit-ii-supplement.html', pdf:'https://drive.google.com/file/d/1lctIPzAHDs8C2omkaUlnXnCP-8JHJckJ/view' },
   { type:'notes',  unit:2, title:'Unit II student notes',                       kb:47,   added:'2026-09-07', file:'1y_dXWG4RueQKzZbcHynf4Dy2z0CfqMgQ' },
   { type:'notes',  unit:2, title:'Unit II notes and questions',                 kb:8,    added:'2026-09-16', file:'17B2mogCcOBnhoaCGXfk4d7Uuu6gKMGW5' },
   { type:'notes',  unit:2, title:'Lecture 6 notes: moulding sand and furnaces', kb:7,    added:'2026-09-16', file:'1shsajCkYMpKGf-tqDcgIdsX1o0Ink5_z' },
@@ -329,6 +336,7 @@ const ASSIGNMENTS = [
    Example: { date:'2026-09-25', text:'Unit III quiz in class on Friday.', until:'2026-09-26', link:'', linkText:'' }
    A notice disappears after its "until" date. */
 const ANNOUNCEMENTS = [
+  { date:'2026-10-09', text:'New Units I–II supplementary notes: expanded DC/stepper/servo explanations, control and robotics, and manufacturing clarifications. Read them with the existing notes and slides; study-together guidance is shown under each unit.', until:'', link:'./notes/unit-i-supplement.html', linkText:'Read Unit I supplement' },
   { date:'2026-10-03', text:'Units I and II revision: attempt the 15-question quiz after the Unit II class on Monday, 5 October. Note difficult questions for our review on Friday, 9 October.', until:'2026-10-09', link:'https://forms.gle/UpExVCr2re2QYAJd6', linkText:'Open revision quiz' },
   { date:'2026-10-03', text:'Unit II follow-up: revisit the Manufacturing Processes slides and notes, especially any questions you found difficult in the in-class quiz.', until:'2026-10-10', link:'', linkText:'' }
 ];
@@ -427,6 +435,8 @@ function rowHTML(it, ctx) {
   if (it.added) meta.push('Added ' + fmtDay(it.added));
   const action = it.type === 'quiz'
     ? '<a class="btn btn-primary" href="' + esc(open) + '" target="_blank" rel="noopener noreferrer">Open quiz</a>'
+    : f === 'HTML'
+    ? '<a class="row-dl" href="' + esc(it.pdf || open) + '" target="_blank" rel="noopener noreferrer" aria-label="Open printable PDF of ' + esc(title) + '">PDF</a>'
     : f === 'SLIDES'
     ? '<a class="row-dl" href="' + esc(open) + '" target="_blank" rel="noopener noreferrer">Open slides</a>'
     : '<a class="row-dl" href="' + esc(dlUrl(it)) + '" rel="noopener noreferrer" aria-label="Download ' + esc(title) + '">Download</a>';
@@ -477,6 +487,7 @@ function renderStudy() {
     const counts = mine.length ? slides.length + ' slides, ' + notes.length + ' notes' : 'Nothing uploaded yet';
 
     let body = '<p class="unit-topics">' + esc(u.topics) + ' (' + u.hours + ' lecture hours)</p>';
+    if (STUDY_TOGETHER[u.n]) body += '<p class="unit-topics"><strong>Study together:</strong> ' + esc(STUDY_TOGETHER[u.n]) + '</p>';
     if (!mine.length) {
       body += '<p class="empty">Nothing has been uploaded for this unit yet.</p>';
     } else {
@@ -705,4 +716,5 @@ themeBtn.addEventListener('click', function () {
 </script>
 </body>
 </html>
+
 
