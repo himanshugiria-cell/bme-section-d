@@ -170,6 +170,123 @@ footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--lin
   .recent-go { grid-column: 2; }
   .check { margin-left: 0; min-height: 44px; }
 }
+
+/* Review proposal: presentation only. Existing content and behaviour retained. */
+:root {
+  --accent: #245F70;
+  --accent-soft: #EAF2F4;
+  --search-surface: #F1F5F6;
+  --search-border: #72858E;
+  --placeholder: #4E616A;
+  --card-line: #CDD7DC;
+  --hover-surface: #F5F8F9;
+  --search-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%234E616A' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='m16 16 4.5 4.5'/%3E%3C/svg%3E");
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --accent: #9ED4DD; --accent-soft: #20343B;
+    --search-surface: #1C2B30; --search-border: #829AA4;
+    --placeholder: #B9CBD2; --card-line: #485B63; --hover-surface: #1A252A;
+    --search-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23B9CBD2' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='m16 16 4.5 4.5'/%3E%3C/svg%3E");
+  }
+}
+:root[data-theme="dark"] {
+  --accent: #9ED4DD; --accent-soft: #20343B;
+  --search-surface: #1C2B30; --search-border: #829AA4;
+  --placeholder: #B9CBD2; --card-line: #485B63; --hover-surface: #1A252A;
+  --search-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23B9CBD2' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='m16 16 4.5 4.5'/%3E%3C/svg%3E");
+}
+
+/* A clearly bounded search field, using the existing accessible label. */
+.search { margin: 1.75rem 0 1.5rem; }
+.search label.sr {
+  position: static; display: block; width: auto; height: auto; margin: 0 0 .45rem;
+  overflow: visible; clip: auto; white-space: normal; font-size: .9rem;
+  font-weight: 600; color: var(--ink);
+}
+.search input {
+  min-height: 54px; padding: .8rem 1rem .8rem 2.85rem;
+  border: 2px solid var(--search-border); border-radius: 8px;
+  background-color: var(--search-surface); color: var(--ink);
+  background-image: var(--search-icon); background-repeat: no-repeat;
+  background-position: .9rem center; background-size: 20px 20px;
+  font-size: 1rem; line-height: 1.4; caret-color: var(--accent);
+}
+.search input::placeholder { color: var(--placeholder); opacity: 1; }
+.search input:hover { border-color: var(--accent); }
+.search input:focus {
+  border-color: var(--accent); outline: 3px solid var(--accent); outline-offset: 3px;
+}
+
+/* Visible keyboard focus, including within the sticky navigation. */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.tab:focus-visible { outline-offset: -4px; }
+.theme-btn { min-height: 44px; padding: .4rem .6rem; border-radius: 6px; }
+.theme-btn:hover { background: var(--hover-surface); }
+.tabs { gap: .8rem; border-bottom-color: var(--card-line); }
+.tab { padding: .8rem .5rem; min-height: 48px; border-bottom-width: 3px; }
+.tab[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+.tab:hover { background: var(--hover-surface); }
+.seg { gap: .5rem; }
+.seg button { min-height: 44px; padding: .35rem .65rem; border: 1px solid transparent; border-radius: 6px; }
+.seg button[aria-pressed="true"] { color: var(--accent); background: var(--accent-soft); border-color: var(--card-line); font-weight: 600; }
+.seg button:hover { background: var(--hover-surface); }
+.plain-btn { min-height: 44px; display: inline-flex; align-items: center; }
+
+/* Keep the restrained type scale, but make the hierarchy easier to scan. */
+.tb-main h1 { font-weight: 400; }
+h2 { font-weight: 600; }
+.unit-title { font-weight: 600; }
+.unit-no { color: var(--accent); font-weight: 400; }
+.unit summary { border-radius: 6px; padding-right: .5rem; }
+.unit summary:hover { background: var(--hover-surface); }
+.unit summary:focus-visible { outline-offset: -3px; }
+.grp { font-size: .93rem; font-weight: 600; color: var(--ink); margin-bottom: .65rem; }
+.unit { scroll-margin-top: 5rem; }
+
+/* Quiet resource cards with visible boundaries and larger link targets. */
+.row, .rows-boxed .row:first-child {
+  padding: .8rem .85rem; margin: .55rem 0;
+  border: 1px solid var(--card-line); border-radius: 7px; background: var(--surface);
+}
+.row:hover { background: var(--hover-surface); }
+.row:focus-within { border-color: var(--accent); }
+.row > div { min-width: 0; }
+.row-title { font-weight: 500; line-height: 1.4; overflow-wrap: anywhere; }
+.fmt { font-weight: 600; line-height: 1.3; text-transform: uppercase; }
+.row-meta { margin-top: .25rem; line-height: 1.45; }
+.row-dl, .row > .btn { min-height: 44px; display: inline-flex; align-items: center; color: var(--accent); }
+.assign { border-top-color: var(--card-line); }
+.assign h3 { font-weight: 600; }
+.assign-actions .btn { min-height: 44px; align-items: center; }
+
+@media (max-width: 480px) {
+  .wrap { padding-left: 1rem; padding-right: 1rem; }
+  .titleblock { padding-top: 1.6rem; padding-bottom: 1.6rem; }
+  .tb-main h1 { font-size: clamp(1.9rem, 8vw, 2.4rem); }
+  .tb-meta { gap: .65rem 1.2rem; }
+  .search { margin-top: 1.4rem; }
+  .search input { font-size: 16px; }
+  .tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 .5rem; overflow: visible; }
+  .tab { width: 100%; text-align: center; padding: .65rem .3rem; }
+  .toolbar { gap: .6rem; }
+  .unit { scroll-margin-top: 7.5rem; }
+  .unit summary { gap: .65rem; }
+  .unit-title { font-size: 1.06rem; }
+  .unit-body { padding-left: 0; }
+  .row { grid-template-columns: 2.4rem minmax(0, 1fr); gap: .2rem .65rem; padding: .8rem; }
+  .row-dl, .row > .btn { grid-column: 2; justify-self: start; }
+  .notice { gap: .7rem; }
+  .notice > span { min-width: 0; overflow-wrap: anywhere; }
+  .assign-actions { gap: .5rem 1rem; }
+}
+@media (forced-colors: active) {
+  .search input { border-color: ButtonText; }
+  .search input:focus { outline-color: Highlight; }
+  .tab[aria-selected="true"] { border-bottom-color: Highlight; }
+  .row { border-color: ButtonText; }
+}
+
 </style>
 </head>
 <body>
