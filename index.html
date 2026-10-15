@@ -288,13 +288,30 @@ h2 { font-weight: 600; }
 }
 
 </style>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/bme-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
+<meta name="theme-color" content="#245F70">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="BME Section D">
+<link rel="stylesheet" href="./pwa.css">
+<script defer src="./pwa.js"></script>
 </head>
 <body>
 <div class="wrap">
 
   <div class="topbar">
+    <button type="button" class="install-btn" id="installApp" aria-haspopup="dialog" aria-controls="installHelp" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m-4-4 4 4 4-4M5 16v4h14v-4"/></svg>
+      Install app
+    </button>
     <button type="button" class="theme-btn" id="themeBtn">Dark mode</button>
   </div>
+
+
+  <p id="connectionNote" class="pwa-status" role="status" hidden>You are offline. Saved pages may be out of date. Reconnect and refresh for the latest material. Drive files, slides and quizzes need internet.</p>
+  <p id="appUpdate" class="pwa-status" role="status" hidden>An app update is ready. <button type="button" id="refreshApp">Refresh when ready</button></p>
 
   <header class="titleblock">
     <div class="tb-main">
@@ -831,7 +848,21 @@ themeBtn.addEventListener('click', function () {
 
 })();
 </script>
+
+<dialog id="installHelp" class="install-help" aria-labelledby="installTitle">
+  <div class="install-heading"><img src="./icons/bme-192.png" width="56" height="56" alt=""><h2 id="installTitle" tabindex="-1" autofocus>Install BME Section D</h2></div>
+  <p class="intro">Keep BME on your home screen and open it like an app. It uses the same website and study resources, with no app-store account or payment.</p>
+  <dl>
+    <dt>Android · Chrome</dt><dd>Open the browser menu and choose <strong>Install app</strong> or <strong>Add to Home screen</strong>. Confirm the installation.</dd>
+    <dt>iPhone or iPad · Safari</dt><dd>Tap <strong>Share → Add to Home Screen</strong>, keep <strong>Open as Web App</strong> enabled when offered, then tap <strong>Add</strong>.</dd>
+    <dt>Computer · Chrome or Edge</dt><dd>Use the install icon in the address bar, or the browser menu’s install option.</dd>
+  </dl>
+  <p class="install-limits">After an online visit, the home page can reopen offline. Supplement pages are saved when you visit them. Drive files, lecture slides and quizzes still need internet. Reconnect and refresh to get the latest material.</p>
+  <div class="install-actions"><button type="button" class="install-btn" id="installNow" hidden>Install now</button><button type="button" class="install-close" id="installClose">Close</button></div>
+</dialog>
+
 </body>
 </html>
+
 
 

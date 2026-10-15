@@ -1,0 +1,41 @@
+/* Small install controls that use the existing calm site palette. */
+.topbar { justify-content: space-between; align-items: center; gap: .75rem; }
+.theme-btn { margin-left: auto; }
+.install-btn {
+  display: inline-flex; align-items: center; gap: .45rem; min-height: 44px;
+  padding: .35rem .7rem; font: 600 .9rem var(--font-body);
+  color: var(--accent); background: var(--accent-soft);
+  border: 1px solid var(--card-line); border-radius: 6px; cursor: pointer;
+}
+.install-btn:hover { border-color: var(--accent); }
+.install-btn svg { width: 18px; height: 18px; flex: none; }
+.pwa-status {
+  margin: 1rem 0 0; padding: .7rem .85rem;
+  border-left: 3px solid var(--accent); background: var(--hover-surface);
+  color: var(--muted); font-size: .93rem;
+}
+.pwa-status button {
+  font: inherit; color: var(--accent); background: transparent; border: 0;
+  padding: .3rem .2rem; text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+}
+.install-help {
+  width: min(34rem, calc(100% - 2rem)); max-height: calc(100dvh - 2rem);
+  overflow-y: auto; padding: 1.5rem; color: var(--ink); background: var(--paper);
+  border: 1px solid var(--card-line); border-radius: 10px;
+  font: 400 1rem/1.55 var(--font-body);
+}
+.install-help::backdrop { background: rgba(0, 0, 0, .4); }
+.install-help h2 { margin: 0; font-size: 1.4rem; }
+.install-help h2:focus { outline: none; }
+.install-help p { margin: .7rem 0; }
+.install-help .intro { color: var(--muted); }
+.install-heading { display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; }
+.install-heading img { border-radius: 12px; flex: none; }
+.install-help dl { margin: 1.2rem 0; }
+.install-help dt { font-weight: 600; margin-top: 1rem; }
+.install-help dd { margin: .2rem 0 0; color: var(--muted); }
+.install-help .install-limits { font-size: .92rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: .9rem; }
+.install-actions { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin-top: 1rem; }
+.install-close { min-height: 44px; padding: .4rem .9rem; border: 1px solid var(--card-line); border-radius: 6px; color: var(--ink); background: var(--surface); font: 400 .95rem var(--font-body); cursor: pointer; }
+@media (max-width: 480px) { .install-help { padding: 1.1rem; } .install-heading img { width: 48px; height: 48px; } }
+@media (display-mode: standalone) { #installApp { display: none; } }
