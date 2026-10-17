@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unit III study guide | BME Section D</title>
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f6f7f8; color: #18232b; font: 17px/1.6 system-ui, -apple-system, "Noto Sans Devanagari", sans-serif; }
+    main { max-width: 920px; margin: auto; padding: 28px 30px 60px; background: #fff; }
+    nav { display: flex; flex-wrap: wrap; gap: 16px; padding-bottom: 22px; border-bottom: 1px solid #dde3e6; }
+    a { color: #155a73; text-underline-offset: 3px; }
+    h1 { font-size: 2rem; line-height: 1.15; margin-top: 30px; }
+    h2 { font-size: 1.5rem; margin-top: 38px; line-height: 1.25; }
+    h3 { font-size: 1.12rem; margin-top: 28px; }
+    p, li { max-width: 80ch; }
+    figure { margin: 24px 0; }
+    svg { display: block; width: 100%; height: auto; }
+    .caption, .updated { color: #49575d; font-size: .9rem; }
+    .callout { margin: 22px 0; padding: 16px 18px; border-left: 4px solid #147e8b; background: #edf7f8; }
+    .support { border-left-color: #b26819; background: #fff7eb; }
+    .table-wrap { overflow-x: auto; margin: 20px 0; }
+    table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+    th, td { text-align: left; vertical-align: top; border: 1px solid #d9dfe3; padding: 12px; }
+    th { background: #f0f3f4; }
+    code { white-space: nowrap; }
+    footer { margin-top: 36px; border-top: 1px solid #dde3e6; padding-top: 20px; }
+    @media (max-width: 600px) { main { padding: 20px 18px; } body { font-size: 16px; } th, td { min-width: 130px; padding: 8px; } }
+    @media print { nav { display: none; } main { padding: 0; } body { font-size: 11pt; } h2, h3 { break-after: avoid; } figure, tr { break-inside: avoid; } a { color: inherit; } }
+  </style>
+</head>
+<body>
+  <main>
+    <nav aria-label="Study navigation"><a href="../#unit-3">Back to BME website</a></nav>
+    <p class="updated">Updated 16 October 2026</p>
+    <h1>Unit III study guide</h1>
+    <h2>Pumps, refrigeration and air conditioning</h2>
+    <p><strong>Basic Mechanical Engineering · PIET · CSE (Regional), Section D</strong></p>
+    <p>This guide puts Unit III in one study order. It follows the official Unit III syllabus: pumps; refrigeration and refrigerants; coefficient of performance (COP); and air conditioning, including window and split AC.</p>
+
+    <section class="callout" aria-label="How to study Unit III">
+      <strong>Study these together</strong>
+      <ol>
+        <li>Read this guide once from start to finish.</li>
+        <li>Open <strong>Unit III Lectures 1–4</strong> in order for diagrams and worked examples.</li>
+        <li>Use <strong>Unit III Lecture 5</strong> for revision and doubts.</li>
+        <li>Use the earlier reference slides only when you want another explanation of a topic.</li>
+      </ol>
+      <p>The guide helps you revise; it does not predict examination questions.</p>
+    </section>
+
+    <h2>Part A: syllabus-level study</h2>
+
+    <h3>1. What a pump does</h3>
+    <p>A <strong>pump</strong> adds mechanical energy to a liquid. This helps the liquid move through pipes, rise to a higher level, or overcome pressure and friction losses. Examples include water supply, irrigation and cooling-water circulation.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Feature</th><th>Reciprocating pump</th><th>Centrifugal pump</th></tr></thead>
+      <tbody>
+        <tr><td>Main moving part</td><td>Piston or plunger moving back and forth</td><td>Rotating impeller with vanes</td></tr>
+        <tr><td>How liquid receives energy</td><td>Changing cylinder volume and pressure</td><td>Rotating vanes transfer energy to liquid</td></tr>
+        <tr><td>Delivery</td><td>Pulsating, stroke by stroke</td><td>Generally smoother and continuous</td></tr>
+        <tr><td>Typical duty</td><td>Controlled small flow at relatively high pressure</td><td>Water supply, irrigation or circulation at a required flow and head</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>2. Reciprocating pump: suction and delivery</h3>
+    <p>A crank and connecting rod convert rotation into the back-and-forth motion of a piston. One-way valves make liquid enter through the suction side and leave through the delivery side.</p>
+    <ul>
+      <li><strong>Suction stroke:</strong> piston moves away from the valve end; cylinder volume increases; pressure falls; suction valve opens; liquid enters.</li>
+      <li><strong>Delivery stroke:</strong> piston moves towards the valve end; cylinder volume decreases; pressure rises; delivery valve opens; liquid leaves.</li>
+    </ul>
+    <p><strong>आसान भाषा में:</strong> जगह बढ़ती है तो pressure घटता है और liquid अंदर आता है। जगह घटती है तो pressure बढ़ता है और liquid बाहर जाता है।</p>
+    <figure>
+      <svg role="img" aria-label="Single-acting reciprocating pump: the suction valve and delivery valve both connect to the liquid chamber on the right of the piston. Liquid enters from below and leaves through the upper delivery pipe." viewBox="0 0 960 480" xmlns="http://www.w3.org/2000/svg">
+        <rect width="960" height="480" fill="#fff"/>
+        <g font-family="Arial, sans-serif" fill="#17324b">
+          <text x="32" y="44" font-size="31" font-weight="700">Single-acting reciprocating pump</text>
+          <text x="32" y="79" font-size="20">Both valves serve the same liquid chamber; the piston moves back and forth.</text>
+          <rect x="280" y="160" width="480" height="170" rx="8" fill="#f4f7f9" stroke="#17324b" stroke-width="3"/>
+          <rect x="420" y="162" width="338" height="166" fill="#e6f3f7"/>
+          <path d="M80 350 V425 H185 V350" fill="#bbdbe8" stroke="#17324b" stroke-width="3"/>
+          <path d="M135 390 H650 V330 M650 160 V112 H900" stroke="#147e8b" stroke-width="10" fill="none"/>
+          <circle cx="160" cy="245" r="34" fill="#f3e5c2" stroke="#17324b" stroke-width="3"/>
+          <circle cx="175" cy="245" r="6" fill="#17324b"/>
+          <line x1="175" y1="245" x2="360" y2="245" stroke="#677785" stroke-width="12"/>
+          <rect x="360" y="162" width="60" height="166" fill="#e89432" stroke="#17324b" stroke-width="3"/>
+          <path d="M305 285 H345" stroke="#677785" stroke-width="3"/>
+          <polygon points="305,285 315,279 315,291 305,285" fill="#677785"/>
+          <polygon points="345,285 335,279 335,291 345,285" fill="#677785"/>
+          <polygon points="650,341 637,360 663,360" fill="#fff" stroke="#17324b" stroke-width="3"/>
+          <line x1="635" y1="339" x2="665" y2="339" stroke="#17324b" stroke-width="3"/>
+          <polygon points="650,125 637,144 663,144" fill="#fff" stroke="#17324b" stroke-width="3"/>
+          <line x1="635" y1="123" x2="665" y2="123" stroke="#17324b" stroke-width="3"/>
+          <polygon points="510,390 491,380 491,400" fill="#147e8b"/>
+          <polygon points="900,112 880,101 880,123" fill="#147e8b"/>
+          <text x="80" y="456" font-size="20">liquid source</text>
+          <text x="284" y="146" font-size="20">cylinder</text>
+          <text x="354" y="353" font-size="20">piston</text>
+          <text x="474" y="235" font-size="23">liquid chamber</text>
+          <text x="475" y="267" font-size="18">volume changes here</text>
+          <text x="120" y="304" font-size="18">crank and rod</text>
+          <text x="680" y="356" font-size="19">suction valve</text>
+          <text x="680" y="152" font-size="19">delivery valve</text>
+          <text x="746" y="99" font-size="19">delivery pipe</text>
+          <text x="292" y="421" font-size="19">suction pipe →</text>
+        </g>
+      </svg>
+      <figcaption class="caption">Simplified diagram. Trace the direction of liquid during the two strokes.</figcaption>
+    </figure>
+
+    <h3>3. Centrifugal pump and priming</h3>
+    <p>In a centrifugal pump, liquid enters at the <strong>eye</strong> near the centre of the impeller. The rotating impeller vanes transfer energy to the liquid, moving it outward. The casing collects and guides it into the delivery pipe.</p>
+    <p><strong>Priming</strong> means filling an ordinary non-self-priming centrifugal pump casing and suction line with liquid and removing air before starting. An air-filled pump may rotate without producing the pressure difference needed to draw water in.</p>
+    <figure>
+      <svg role="img" aria-label="Centrifugal pump front-view schematic. The suction inlet leads to the central impeller eye; the rotating vanes send liquid outward into the volute casing and delivery pipe. The axial inlet is drawn as a horizontal connector for clarity." viewBox="0 0 960 480" xmlns="http://www.w3.org/2000/svg">
+        <rect width="960" height="480" fill="#fff"/>
+        <g font-family="Arial, sans-serif" fill="#17324b">
+          <text x="32" y="44" font-size="31" font-weight="700">Centrifugal pump: energy goes through the impeller</text>
+          <path d="M623 145 C765 145 770 365 508 373 C247 380 214 117 441 87 C560 71 661 132 623 145" fill="#f4f7f9" stroke="#17324b" stroke-width="4"/>
+          <circle cx="468" cy="230" r="118" fill="#e6f3f7" stroke="#17324b" stroke-width="4"/>
+          <circle cx="468" cy="230" r="34" fill="#fff" stroke="#17324b" stroke-width="4"/>
+          <path d="M468 196 L510 136 L502 214 Z M502 232 L577 253 L508 268 Z M457 263 L429 327 L436 248 Z M433 215 L358 189 L427 181 Z" fill="#e89432" stroke="#17324b" stroke-width="3"/>
+          <path d="M623 145 H885" stroke="#147e8b" stroke-width="12" fill="none"/>
+          <polygon points="885,145 866,135 866,155" fill="#147e8b"/>
+          <path d="M72 230 H442" stroke="#fff" stroke-width="19" fill="none"/>
+          <path d="M72 230 H442" stroke="#147e8b" stroke-width="10" fill="none"/>
+          <polygon points="449,230 431,219 431,241" fill="#147e8b"/>
+          <path d="M397 109 Q468 69 541 108" fill="none" stroke="#677785" stroke-width="4"/>
+          <polygon points="541,108 527,101 530,115" fill="#677785"/>
+          <text x="385" y="70" font-size="20">impeller rotation</text>
+          <path d="M468 264 V389" stroke="#677785" stroke-width="2" fill="none"/>
+          <text x="410" y="413" font-size="20">impeller eye</text>
+          <path d="M558 264 L605 283" stroke="#677785" stroke-width="2" fill="none"/>
+          <text x="612" y="290" font-size="20">impeller vanes</text>
+          <path d="M661 320 L706 355" stroke="#677785" stroke-width="2" fill="none"/>
+          <text x="707" y="373" font-size="20">volute casing</text>
+          <text x="80" y="209" font-size="20">suction inlet</text>
+          <text x="700" y="130" font-size="20">delivery pipe</text>
+          <text x="32" y="453" font-size="18">Axial inlet shown as a connector: liquid enters the centre, then moves out through the vanes.</text>
+        </g>
+      </svg>
+      <figcaption class="caption">Simplified centrifugal-pump sketch. The impeller supplies energy; the casing guides the flow.</figcaption>
+    </figure>
+
+    <h3>4. Pump efficiency: what the ratios mean</h3>
+    <p><strong>Efficiency</strong> compares useful output with input. It is a ratio or percentage, not a separate kind of power. <strong>Discharge (Q)</strong> means the liquid volume delivered per unit time (for example, L/min or m³/s). <strong>Head (H)</strong> means the energy given to each unit weight of liquid, commonly expressed as an equivalent height in metres.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Quantity</th><th>Meaning</th><th>Useful formula</th></tr></thead>
+      <tbody>
+        <tr><td>Discharge, Q</td><td>Liquid volume delivered per unit time</td><td>Use L/min or m³/s consistently</td></tr>
+        <tr><td>Head, H</td><td>Energy supplied to liquid per unit weight</td><td>Usually stated in metres</td></tr>
+        <tr><td>Theoretical discharge, single acting</td><td>Ideal liquid volume delivered each second</td><td><code>Qth = A × L × N / 60</code></td></tr>
+        <tr><td>Volumetric efficiency</td><td>Actual flow compared with theoretical flow</td><td><code>ηv = Qactual / Qth × 100%</code></td></tr>
+        <tr><td>Overall pump efficiency</td><td>Useful liquid power compared with shaft input</td><td><code>ηo = ρgQH / Pshaft × 100%</code></td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>Symbols and units:</strong> A = piston area (m²), L = stroke length (m), N = crank speed (revolutions/minute), ρ = liquid density (kg/m³), and g ≈ 9.81 m/s². In the overall-efficiency formula, use Q in m³/s, H in metres and shaft input power Pshaft in watts.</p>
+    <p><strong>Worked idea:</strong> If the theoretical discharge is 60 L/min and actual discharge is 54 L/min, <code>ηv = 54/60 × 100 = 90%</code>. Keep the flow units the same before dividing.</p>
+
+    <h3>5. Refrigeration: moving heat</h3>
+    <p>Refrigeration removes heat from a cold space and rejects it to warmer surroundings. It does not destroy heat. A <strong>refrigerant</strong> is the working fluid that carries heat through the system.</p>
+    <figure>
+      <svg role="img" aria-label="Vapour-compression refrigeration cycle with evaporator, compressor, condenser and expansion device labelled in order." viewBox="0 0 960 470" xmlns="http://www.w3.org/2000/svg">
+        <rect width="960" height="470" fill="#fff"/>
+        <g font-family="Arial, sans-serif" fill="#17324b">
+          <text x="32" y="44" font-size="31" font-weight="700">Vapour-compression refrigeration cycle</text>
+          <rect x="65" y="192" width="178" height="95" rx="12" fill="#bbdbe8" stroke="#17324b" stroke-width="3"/>
+          <rect x="385" y="83" width="178" height="95" rx="12" fill="#f3e5c2" stroke="#17324b" stroke-width="3"/>
+          <rect x="697" y="192" width="178" height="95" rx="12" fill="#f5d7c7" stroke="#17324b" stroke-width="3"/>
+          <rect x="385" y="327" width="178" height="75" rx="12" fill="#e6f3f7" stroke="#17324b" stroke-width="3"/>
+          <text x="154" y="232" text-anchor="middle" font-size="22" font-weight="700">EVAPORATOR</text>
+          <text x="154" y="260" text-anchor="middle" font-size="18">absorbs heat</text>
+          <text x="474" y="123" text-anchor="middle" font-size="22" font-weight="700">COMPRESSOR</text>
+          <text x="474" y="150" text-anchor="middle" font-size="18">work input</text>
+          <text x="786" y="232" text-anchor="middle" font-size="22" font-weight="700">CONDENSER</text>
+          <text x="786" y="260" text-anchor="middle" font-size="18">rejects heat</text>
+          <text x="474" y="358" text-anchor="middle" font-size="17" font-weight="700">EXPANSION DEVICE</text>
+          <text x="474" y="383" text-anchor="middle" font-size="17">reduces pressure</text>
+          <path d="M243 239 H385 L421 178" fill="none" stroke="#147e8b" stroke-width="6"/>
+          <path d="M563 131 H642 V239 H697" fill="none" stroke="#e89432" stroke-width="6"/>
+          <path d="M786 287 V364 H563" fill="none" stroke="#e89432" stroke-width="6"/>
+          <path d="M385 364 H154 V287" fill="none" stroke="#147e8b" stroke-width="6"/>
+          <polygon points="421,178 408,177 418,190" fill="#147e8b"/><polygon points="697,239 684,233 684,245" fill="#e89432"/><polygon points="563,364 575,358 575,370" fill="#e89432"/><polygon points="154,287 148,300 160,300" fill="#147e8b"/>
+          <text x="67" y="144" font-size="19">heat from cold space</text>
+          <path d="M155 151 V190" stroke="#677785" stroke-width="4" stroke-dasharray="6 4"/>
+          <polygon points="155,190 148,177 162,177" fill="#677785"/>
+          <text x="704" y="144" font-size="19">heat to surroundings</text>
+          <path d="M785 192 V151" stroke="#677785" stroke-width="4" stroke-dasharray="6 4"/>
+          <polygon points="785,151 778,164 792,164" fill="#677785"/>
+          <path d="M474 54 V82" stroke="#677785" stroke-width="4" stroke-dasharray="6 4"/>
+          <polygon points="474,82 467,69 481,69" fill="#677785"/>
+          <text x="88" y="442" font-size="20">Evaporator → compressor → condenser → expansion device → evaporator</text>
+        </g>
+      </svg>
+      <figcaption class="caption">The refrigerant follows the closed path. Heat and work arrows are different from refrigerant-flow arrows.</figcaption>
+    </figure>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Component</th><th>What it does</th><th>Refrigerant condition after it</th></tr></thead>
+      <tbody>
+        <tr><td>Evaporator</td><td>Absorbs heat from the cold space</td><td>Low-pressure vapour</td></tr>
+        <tr><td>Compressor</td><td>Raises vapour pressure and temperature using work input</td><td>High-pressure vapour</td></tr>
+        <tr><td>Condenser</td><td>Rejects heat to surroundings and condenses vapour</td><td>High-pressure liquid</td></tr>
+        <tr><td>Expansion device</td><td>Reduces pressure before the evaporator</td><td>Low-pressure liquid-vapour mixture</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>6. Refrigerant properties and refrigeration-system types</h3>
+    <p>A suitable refrigerant should evaporate and condense at useful conditions, transfer heat effectively, remain stable and compatible with equipment, and have acceptable safety and environmental properties. Safety includes low toxicity and manageable flammability; environmental considerations include low ozone-depletion and global-warming impact.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>System type</th><th>Main idea</th></tr></thead>
+      <tbody>
+        <tr><td>Vapour compression</td><td>A mechanical compressor handles refrigerant vapour; common in refrigerators and room AC systems.</td></tr>
+        <tr><td>Vapour absorption</td><td>An absorbent, solution pump and heat-driven generator replace the main mechanical compressor role.</td></tr>
+        <tr><td>Air cycle</td><td>Air is compressed, cooled and expanded; its temperature falls during expansion.</td></tr>
+        <tr><td>Thermoelectric</td><td>Electric current produces cooling through the Peltier effect; useful in small applications.</td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>COP:</strong> <code>COP = cooling rate / input power</code>. If a refrigerator removes 2.0 kW of heat with 0.5 kW input, COP = 2.0 / 0.5 = 4. A COP greater than one is possible because the system moves heat; it does not create energy.</p>
+
+    <h3>7. Air conditioning</h3>
+    <p>Air conditioning maintains desired indoor conditions. These can include temperature, humidity, cleanliness and air movement. A room AC usually cools and circulates indoor air; moisture may condense on the cold coil and leave through a drain.</p>
+    <p><strong>आसान भाषा में:</strong> AC कमरे की गर्मी refrigerant के द्वारा बाहर छोड़ता है। Drain में निकलने वाला पानी हवा की नमी से बनता है; वह refrigerant नहीं है।</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Classification basis</th><th>Types</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Purpose</td><td>Comfort / industrial</td><td>For people’s comfort or for a process/material needing controlled conditions</td></tr>
+        <tr><td>Seasonal duty</td><td>Summer / winter / year-round</td><td>Cooling, heating and humidity treatment as needed</td></tr>
+        <tr><td>Arrangement</td><td>Window / split / central</td><td>How equipment is arranged and serves the space</td></tr>
+      </tbody>
+    </table></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Feature</th><th>Window AC</th><th>Split AC</th></tr></thead>
+      <tbody>
+        <tr><td>Arrangement</td><td>Main parts in one casing</td><td>Indoor and outdoor units are separate</td></tr>
+        <tr><td>Compressor and condenser</td><td>In the common unit, facing outdoors</td><td>Usually in the outdoor unit</td></tr>
+        <tr><td>Installation</td><td>Needs a suitable window or wall opening</td><td>Needs indoor/outdoor mounts, refrigerant pipes, drain and wiring</td></tr>
+        <tr><td>Typical application setting</td><td>Compact room cooling where a suitable opening is available</td><td>Room cooling where separate indoor and outdoor units can be installed</td></tr>
+      </tbody>
+    </table></div>
+    <p>The basic cooling principle is the same in both: evaporator absorbs room heat; compressor raises pressure; condenser rejects heat outdoors; expansion device lowers pressure before the evaporator. A ductless split AC circulates room air. Air circulation and fresh-air ventilation are different functions.</p>
+
+    <h2>Part B: Assignment 3 support</h2>
+    <section class="callout support">
+      <p>These points support questions in Assignment 3. They are useful extensions of the Unit III teaching; they are not additional official syllabus headings.</p>
+    </section>
+    <h3>Double-acting reciprocating pump</h3>
+    <p>In a <strong>double-acting</strong> pump, both sides of the piston handle liquid. While one side fills, the other side delivers. On the next stroke their roles exchange. The exact discharge is affected by the piston-rod area, so do not simply state that it is always exactly double that of a single-acting pump.</p>
+    <h3>One ton of refrigeration (TR)</h3>
+    <p><strong>1 TR</strong> is a rate of cooling, not the mass of a machine. It is conventionally the heat-removal rate needed to freeze one short ton of water (2,000 lb, approximately 907 kg) at 0°C to ice at 0°C in 24 hours. <strong>1 TR ≈ 3.517 kW</strong> (approximately 211 kJ/min).</p>
+
+    <h2>Revision check</h2>
+    <ol>
+      <li>Why does a reciprocating pump need suction and delivery valves?</li>
+      <li>Why is priming needed before starting an ordinary centrifugal pump?</li>
+      <li>Which efficiency compares actual discharge with theoretical discharge?</li>
+      <li>Trace the refrigerant from the evaporator to the compressor, condenser and expansion device.</li>
+      <li>Why can refrigeration COP be greater than one?</li>
+      <li>List two refrigerant properties besides cooling performance.</li>
+      <li>What is the difference between air circulation and ventilation?</li>
+      <li>State two arrangement differences between a window AC and a split AC.</li>
+    </ol>
+    <p><strong>Self-check answers:</strong> valves control one-way flow; priming removes air and fills the liquid path; volumetric efficiency; low-pressure vapour → high-pressure vapour → high-pressure liquid → low-pressure mixture; COP measures heat moved per input; safety/environment/compatibility are valid properties; circulation moves indoor air while ventilation supplies/removes outdoor air; window AC is one casing while split AC has separate indoor/outdoor units and connecting pipes.</p>
+
+    <footer>Based on the official BME 2026–27 Unit III syllabus, the Unit III lecture sequence and Assignment 3. Existing notes and slide decks remain available on the BME Section D website.</footer>
+  </main>
+</body>
+</html>
