@@ -467,7 +467,7 @@ const FILES = [
 const ASSIGNMENTS = [
   { no:1, unit:1, title:'Fundamentals, Robotics and Materials',      questions:8, due:'2026-09-17', kb:66,  added:'2026-09-22', file:'1UzFpyufD_EMrXtb8VoVtAhbh3cxPyJ3j', published:true },
   { no:2, unit:2, title:'Manufacturing Processes',                    questions:8, due:'2026-09-30', kb:66,  added:'2026-09-22', file:'12YnjMRyzp6OQp6P5dFa5hRt2drAlBg4O', published:true },
-  { no:3, unit:3, title:'Pumps, Refrigeration and Air Conditioning',  questions:8, due:'', kb:66,  added:'2026-09-22', file:'1Rjud5EzXijg-CYO6DsRB6PDCaxgxDYN3', published:false },
+  { no:3, unit:3, title:'Pumps, Refrigeration and Air Conditioning',  questions:8, due:'', kb:3,  added:'2026-10-25', file:'1Y4zc8TwYy-DoByU36OxaE3GBWmqReLZw', published:true },
   { no:4, unit:4, title:'Transmission of Power',                      questions:8, due:'', kb:100, added:'2026-09-22', file:'1YObLoK5fxMiQ-742u_nGHxxhTNxoYlxh', published:false },
   { no:5, unit:5, title:'Thermodynamics and IC Engines',              questions:8, due:'', kb:66,  added:'2026-09-22', file:'1_ChHiMM_2xxYs3FAp_1qUPcVWlF1G6F4', published:false }
 ];
@@ -476,6 +476,7 @@ const ASSIGNMENTS = [
    Example: { date:'2026-09-25', text:'Unit III quiz in class on Friday.', until:'2026-09-26', link:'', linkText:'' }
    A notice disappears after its "until" date. */
 const ANNOUNCEMENTS = [
+  { date:'2026-10-25', text:'Assignment 3 for Unit III is now available. Use the Unit III study guide and Lectures 1–5 alongside it.', until:'', link:'https://drive.google.com/file/d/1Y4zc8TwYy-DoByU36OxaE3GBWmqReLZw/view', linkText:'Open Assignment 3' },
   { date:'2026-10-16', text:'New Unit III study guide: read it with Unit III Lectures 1–5. Earlier Unit III slides remain available as extra reference material.', until:'', link:'./notes/unit-iii-study-guide.html', linkText:'Open Unit III study guide' },
   { date:'2026-10-09', text:'New Units I–II supplementary notes: expanded DC/stepper/servo explanations, control and robotics, and manufacturing clarifications. Read them with the existing notes and slides; study-together guidance is shown under each unit.', until:'', link:'./notes/unit-i-supplement.html', linkText:'Read Unit I supplement' },
   { date:'2026-10-03', text:'Units I and II revision: attempt the 15-question quiz after the Unit II class on Monday, 5 October. Note difficult questions for our review on Friday, 9 October.', until:'2026-10-09', link:'https://forms.gle/UpExVCr2re2QYAJd6', linkText:'Open revision quiz' },
@@ -755,7 +756,7 @@ function renderFoot() {
   const all = FILES.filter(isVisible).concat(publishedAssignments()).map(x => x.added).filter(Boolean).sort();
   const last = all.length ? all[all.length - 1] : null;
   $('#foot').innerHTML = (last ? 'Latest file upload: ' + fmtDay(last) + ' ' + last.slice(0, 4) + '. ' : '') +
-    'Site revised 16 Oct 2026. Materials open on this site or in Google Drive; quizzes open in Google Forms. If you have trouble opening a file, tell me in class or email me at <a href="mailto:himanshu.giria@poornima.org">himanshu.giria@poornima.org</a>. Mention which file it was and what error appeared; a screenshot would help.';
+    'Site revised 25 Oct 2026. Materials open on this site or in Google Drive; quizzes open in Google Forms. If you have trouble opening a file, tell me in class or email me at <a href="mailto:himanshu.giria@poornima.org">himanshu.giria@poornima.org</a>. Mention which file it was and what error appeared; a screenshot would help.';
 }
 
 /* ---------- render everything ---------- */
