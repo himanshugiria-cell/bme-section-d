@@ -1,7 +1,7 @@
 /* Only this public BME website is cached. Google Drive and Forms are never cached. */
 'use strict';
 const CACHE_PREFIX = 'bme-section-d-shell-';
-const CACHE = CACHE_PREFIX + '2026-10-16-unit-iii-v1';
+const CACHE = CACHE_PREFIX + '2026-10-25-assignment-3-v1';
 const BASE = new URL('./', self.location.href);
 const HOME = new URL('./', BASE).href;
 const OFFLINE = new URL('offline.html', BASE).href;
