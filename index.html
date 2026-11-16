@@ -129,6 +129,12 @@ h2 { font: 400 1.35rem/1.3 var(--font-body); margin: 0 0 .5rem; letter-spacing: 
 
 /* ---- Assignments ---- */
 .assign { border-top: 1px solid var(--line); padding: 1.5rem 0; }
+.assign-collapsed { padding: .8rem 0; }
+.assign-collapsed summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem 1rem; cursor: pointer; list-style: none; }
+.assign-collapsed summary::-webkit-details-marker { display: none; }
+.assign-collapsed summary::after { content: '+'; margin-left: auto; color: var(--muted); font-size: 1.2rem; }
+.assign-collapsed[open] summary::after { content: '−'; }
+.assign-featured { border-top: 2px solid var(--accent); background: var(--surface); padding: 1rem; border-radius: .5rem; }
 .assign-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: .3rem 1rem; }
 .assign h3 { margin: 0; font: 400 1.15rem/1.3 var(--font-body); }
 .assign-sub { margin: .2rem 0 0; color: var(--muted); }
@@ -684,16 +690,16 @@ function renderAssign() {
   if (!pub.length) return h + '<p class="empty">No assignments posted yet. Check back soon.</p>';
   h += pub.map(a => {
     const done = state.done.has(a.no), d = dueInfo(a, done), f = assignmentAsFile(a), u = unitOf(a.unit);
-    return '<article class="assign' + (done ? ' is-done' : '') + '">' +
-      '<div class="assign-top"><h3>Assignment ' + a.no + '</h3>' +
-      '<span class="due due-' + d.cls + '">' + esc(d.text) + '</span></div>' +
-      '<p class="assign-sub">' + esc(a.title) + (isNew(a) ? '<span class="badge-new">New</span>' : '') + '</p>' +
-      '<p class="assign-meta">Unit ' + u.roman + ', ' + a.questions + ' questions.</p>' +
+    const collapsed = a.no === 1 || a.no === 2;
+    const content = '<p class="assign-meta">Unit ' + u.roman + ', ' + a.questions + ' questions.</p>' +
       '<div class="assign-actions">' +
       '<a class="btn btn-primary" href="' + esc(viewUrl(f)) + '" target="_blank" rel="noopener noreferrer">Open PDF</a>' +
       '<a class="btn" href="' + esc(dlUrl(f)) + '" rel="noopener noreferrer" aria-label="Download assignment ' + a.no + ' PDF">Download</a>' +
       '<label class="check"><input type="checkbox" data-done="' + a.no + '"' + (done ? ' checked' : '') + '> Completed (my tracker)</label>' +
-      '</div></article>';
+      '</div>';
+    const heading = '<h3>Assignment ' + a.no + '</h3><span class="assign-sub">' + esc(a.title) + (isNew(a) ? '<span class="badge-new">New</span>' : '') + '</span><span class="due due-' + d.cls + '">' + esc(d.text) + '</span>';
+    if (collapsed) return '<details class="assign assign-collapsed' + (done ? ' is-done' : '') + '"><summary>' + heading + '</summary>' + content + '</details>';
+    return '<article class="assign' + (a.no === 4 ? ' assign-featured' : '') + (done ? ' is-done' : '') + '"><div class="assign-top">' + heading + '</div>' + content + '</article>';
   }).join('');
   return h;
 }
