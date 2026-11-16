@@ -745,7 +745,9 @@ function renderSearch() {
 /* ---------- notices + footer ---------- */
 function renderNotices() {
   const el = $('#notices');
-  const act = ANNOUNCEMENTS.filter(a => !a.until || daysFromToday(a.until) >= 0).sort((a, b) => b.date.localeCompare(a.date));
+  const act = ANNOUNCEMENTS.filter(a => !a.until || daysFromToday(a.until) >= 0)
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 1);
   el.hidden = !act.length;
   if (!act.length) return;
   el.innerHTML = '<h2>Class update</h2><ul>' + act.map(a =>
