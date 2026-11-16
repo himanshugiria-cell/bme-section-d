@@ -473,7 +473,7 @@ const FILES = [
 const ASSIGNMENTS = [
   { no:1, unit:1, title:'Fundamentals, Robotics and Materials',      questions:8, due:'2026-09-17', kb:66,  added:'2026-09-22', file:'1UzFpyufD_EMrXtb8VoVtAhbh3cxPyJ3j', published:true },
   { no:2, unit:2, title:'Manufacturing Processes',                    questions:8, due:'2026-09-30', kb:66,  added:'2026-09-22', file:'12YnjMRyzp6OQp6P5dFa5hRt2drAlBg4O', published:true },
-  { no:3, unit:3, title:'Pumps, Refrigeration and Air Conditioning',  questions:8, due:'', kb:3,  added:'2026-10-25', file:'1Y4zc8TwYy-DoByU36OxaE3GBWmqReLZw', published:true },
+  { no:3, unit:3, title:'Pumps, Refrigeration and Air Conditioning',  questions:8, due:'2026-11-16', kb:3,  added:'2026-10-25', file:'1Y4zc8TwYy-DoByU36OxaE3GBWmqReLZw', published:true },
   { no:4, unit:4, title:'Transmission of Power',                      questions:5, due:'', kb:219, added:'2026-11-16', url:'./assignments/assignment-4.pdf', published:true },
   { no:5, unit:5, title:'Thermodynamics and IC Engines',              questions:8, due:'', kb:66,  added:'2026-09-22', file:'1_ChHiMM_2xxYs3FAp_1qUPcVWlF1G6F4', published:false }
 ];
@@ -690,7 +690,7 @@ function renderAssign() {
   if (!pub.length) return h + '<p class="empty">No assignments posted yet. Check back soon.</p>';
   h += pub.map(a => {
     const done = state.done.has(a.no), d = dueInfo(a, done), f = assignmentAsFile(a), u = unitOf(a.unit);
-    const collapsed = a.no === 1 || a.no === 2;
+    const collapsed = a.no === 1 || a.no === 2 || a.no === 3;
     const content = '<p class="assign-meta">Unit ' + u.roman + ', ' + a.questions + ' questions.</p>' +
       '<div class="assign-actions">' +
       '<a class="btn btn-primary" href="' + esc(viewUrl(f)) + '" target="_blank" rel="noopener noreferrer">Open PDF</a>' +
