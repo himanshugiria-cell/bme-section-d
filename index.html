@@ -475,7 +475,7 @@ const ASSIGNMENTS = [
   { no:2, unit:2, title:'Manufacturing Processes',                    questions:8, due:'2026-09-30', kb:66,  added:'2026-09-22', file:'12YnjMRyzp6OQp6P5dFa5hRt2drAlBg4O', published:true },
   { no:3, unit:3, title:'Pumps, Refrigeration and Air Conditioning',  questions:8, due:'2026-11-16', kb:3,  added:'2026-10-25', file:'1Y4zc8TwYy-DoByU36OxaE3GBWmqReLZw', published:true },
   { no:4, unit:4, title:'Transmission of Power',                      questions:5, due:'', kb:219, added:'2026-11-16', url:'./assignments/assignment-4.pdf', published:true },
-  { no:5, unit:5, title:'Thermodynamics and IC Engines',              questions:8, due:'', kb:66,  added:'2026-09-22', file:'1_ChHiMM_2xxYs3FAp_1qUPcVWlF1G6F4', published:false }
+  { no:5, unit:5, title:'Thermodynamics and IC Engines', questions:5, due:'', added:'', url:'https://drive.google.com/file/d/1xEtnJbreBgcfAoipnmi3_E8RTEdpFbdH/view', fmt:'DOCX', published:false }
 ];
 
 /* NOTICES: short messages shown at the top of the page.
@@ -568,15 +568,6 @@ function loadDone() {
 }
 const state = { tab: 'study', filter: 'all', q: '', open: new Set(), done: loadDone() };
 
-function latestUnit() {
-  let best = null;
-  FILES.forEach(f => {
-    if (!isVisible(f) || !f.unit || (f.type !== 'slides' && f.type !== 'notes')) return;
-    if (!best || f.added > best.added || (f.added === best.added && f.unit > best.unit)) best = f;
-  });
-  return best ? best.unit : 1;
-}
-
 /* ---------- one file row ---------- */
 function rowHTML(it, ctx) {
   const f = fmtOf(it), title = displayTitle(it), open = viewUrl(it);
@@ -588,6 +579,8 @@ function rowHTML(it, ctx) {
     ? '<a class="btn btn-primary" href="' + esc(open) + '" target="_blank" rel="noopener noreferrer">Open quiz</a>'
     : f === 'HTML'
     ? '<a class="row-dl" href="' + esc(it.pdf || open) + '" target="_blank" rel="noopener noreferrer" aria-label="Open ' + esc(title) + '">' + (it.pdf ? 'PDF' : 'Open notes') + '</a>'
+    : f === 'DOCX' && it.type === 'assignment'
+    ? '<a class="row-dl" href="' + esc(open) + '" target="_blank" rel="noopener noreferrer">Open combined assignments</a>'
     : f === 'SLIDES'
     ? '<a class="row-dl" href="' + esc(open) + '" target="_blank" rel="noopener noreferrer">Open slides</a>'
     : '<a class="row-dl" href="' + esc(dlUrl(it)) + '" rel="noopener noreferrer" aria-label="Download ' + esc(title) + '">Download</a>';
@@ -679,7 +672,7 @@ function dueInfo(a, done) {
   return { cls: 'open', text: 'Due ' + when + ', in ' + n + ' days' };
 }
 function assignmentAsFile(a) {
-  return { type: 'assignment', unit: a.unit, no: a.no, title: 'Assignment ' + a.no + ': ' + a.title, file: a.file, url: a.url, kb: a.kb, added: a.added, fmt: 'PDF' };
+  return { type: 'assignment', unit: a.unit, no: a.no, title: 'Assignment ' + a.no + ': ' + a.title, file: a.file, url: a.url, kb: a.kb, added: a.added, fmt: a.fmt || 'PDF' };
 }
 function publishedAssignments() {
   return ASSIGNMENTS.filter(a => a.published !== false);
@@ -693,8 +686,8 @@ function renderAssign() {
     const collapsed = a.no === 1 || a.no === 2 || a.no === 3;
     const content = '<p class="assign-meta">Unit ' + u.roman + ', ' + a.questions + ' questions.</p>' +
       '<div class="assign-actions">' +
-      '<a class="btn btn-primary" href="' + esc(viewUrl(f)) + '" target="_blank" rel="noopener noreferrer">Open PDF</a>' +
-      '<a class="btn" href="' + esc(dlUrl(f)) + '" rel="noopener noreferrer" aria-label="Download assignment ' + a.no + ' PDF">Download</a>' +
+      '<a class="btn btn-primary" href="' + esc(viewUrl(f)) + '" target="_blank" rel="noopener noreferrer">' + (f.fmt === 'DOCX' ? 'Open combined assignments' : 'Open PDF') + '</a>' +
+      (f.fmt === 'DOCX' ? '' : '<a class="btn" href="' + esc(dlUrl(f)) + '" rel="noopener noreferrer" aria-label="Download assignment ' + a.no + ' PDF">Download</a>') +
       '<label class="check"><input type="checkbox" data-done="' + a.no + '"' + (done ? ' checked' : '') + '> Completed (my tracker)</label>' +
       '</div>';
     const heading = '<h3>Assignment ' + a.no + '</h3><span class="assign-sub">' + esc(a.title) + (isNew(a) ? '<span class="badge-new">New</span>' : '') + '</span><span class="due due-' + d.cls + '">' + esc(d.text) + '</span>';
@@ -870,7 +863,7 @@ themeBtn.addEventListener('click', function () {
   const h = (location.hash || '').replace('#', '');
   const found = Object.keys(HASH).find(k => HASH[k] === h);
   if (found) state.tab = found;
-  state.open.add(latestUnit());
+  state.open.add(4);
   syncThemeBtn();
   renderNotices();
   renderFoot();
