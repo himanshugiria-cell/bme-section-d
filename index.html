@@ -293,6 +293,12 @@ h2 { font-weight: 600; }
   .row { border-color: ButtonText; }
 }
 
+  .exam-banner { margin-top: .75rem; padding: .5rem .75rem; overflow: hidden; border: 2px solid var(--accent); border-radius: 6px; background: var(--accent-soft); color: var(--ink); text-align: center; }
+  @media (prefers-reduced-motion: no-preference) and (min-width: 36rem) {
+    .exam-banner strong { display: inline-block; animation: exam-slide 2s ease-out 2 alternate; }
+    .exam-banner:hover strong { animation: none; }
+    @keyframes exam-slide { from { transform: translateX(32%); } to { transform: translateX(0); } }
+  }
 </style>
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="./icons/bme-192.png">
@@ -306,6 +312,7 @@ h2 { font-weight: 600; }
 </head>
 <body>
 <div class="wrap">
+  <aside class="exam-banner" aria-label="Exam announcement"><strong>Open Book Test starts on 3 December 2026</strong></aside>
 
   <div class="topbar">
     <button type="button" class="install-btn" id="installApp" aria-haspopup="dialog" aria-controls="installHelp" hidden>
@@ -482,6 +489,7 @@ const ASSIGNMENTS = [
    Example: { date:'2026-09-25', text:'Unit III quiz in class on Friday.', until:'2026-09-26', link:'', linkText:'' }
    A notice disappears after its "until" date. */
 const ANNOUNCEMENTS = [
+  { date:'2026-11-25', text:'Assignment 5 for Unit V (Thermodynamics and IC Engines) is available in the combined assignment document.', until:'', link:'https://drive.google.com/file/d/1xEtnJbreBgcfAoipnmi3_E8RTEdpFbdH/view', linkText:'Open combined assignments' },
   { date:'2026-11-16', text:'Assignment 4 for Unit IV covers belt drives and gear trains.', until:'', link:'./assignments/assignment-4.pdf', linkText:'Open Assignment 4' },
   { date:'2026-10-25', text:'Assignment 3 for Unit III is now available. Use the Unit III study guide and Lectures 1–5 alongside it.', until:'', link:'https://drive.google.com/file/d/1Y4zc8TwYy-DoByU36OxaE3GBWmqReLZw/view', linkText:'Open Assignment 3' },
   { date:'2026-10-16', text:'New Unit III study guide: read it with Unit III Lectures 1–5. Earlier Unit III slides remain available as extra reference material.', until:'', link:'./notes/unit-iii-study-guide.html', linkText:'Open Unit III study guide' },
